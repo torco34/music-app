@@ -23,7 +23,7 @@
     title="Registro"
     @close="closeModal('register')"
   >
-    <BaseForm :is-register="true" @submit="handleRegister" />
+    <RegisterLoginForm :is-register="true" @submit="handleRegister" />
   </BaseModal>
   <!-- Modal para Inicio de Sesión -->
   <BaseModal
@@ -31,12 +31,12 @@
     title="Iniciar Sesión"
     @close="closeModal('login')"
   >
-    <BaseForm :is-register="false" @submit="handleLogin" />
+    <RegisterLoginForm :is-register="false" @submit="handleLogin" />
   </BaseModal>
 </template>
 
 <script setup>
-import BaseForm from 'src/components/shared/BaseForm.vue';
+import RegisterLoginForm from 'src/components/form/RegisterLoginForm.vue';
 import BaseModal from 'src/components/shared/BaseModal.vue';
 import { ref } from 'vue';
 import { useAuthStore } from '../../stores/storeAuth/AuthStore.js';
