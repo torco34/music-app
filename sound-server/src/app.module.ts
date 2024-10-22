@@ -1,10 +1,10 @@
 import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 import * as dotenv from 'dotenv';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
 import { TodoModule } from './todo/todo.module';
 import { UsersModule } from './users/users.module';
+import { ItemsModule } from './items/items.module';
+
 dotenv.config();
 @Module({
   imports: [
@@ -12,9 +12,8 @@ dotenv.config();
 
     TodoModule,
     UsersModule,
+    ItemsModule,
   ],
-
-  controllers: [AppController],
-  providers: [AppService],
+  // controllers: [NombreControladorController],
 })
 export class AppModule {}

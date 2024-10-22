@@ -1,0 +1,64 @@
+{
+  "title1": "Géneros populares",
+
+  "title2": "Listas destacadas",
+
+  "genres": [
+    {
+      "name": "Rock",
+      "subtitle": "La esencia del alma",
+      "image": "https://previews.123rf.com/images/scusi/scusi1501/scusi150100008/35386831-concepto-de-la-m%C3%BAsica-rock.jpg"
+    },
+    {
+      "name": "Pop",
+      "subtitle": "La esencia del alma",
+      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQhGFV9pDlrsiY4krs0BXfUdP2zLDIMAdRDfQ&s"
+    },
+    {
+      "name": "Jazz",
+      "subtitle": "Melodías que trascienden",
+      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRzx4t0uhuliD0QNJJBckYQuA5sW7GZAjdUpw&s"
+    },
+    {
+      "name": "Hip-Hop",
+      "subtitle": "La voz de una cultura",
+      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRvgo8lrlIsPL04FjoGClSlhgiIueek_sn71g&s"
+    },
+    {
+      "name": "Reggae",
+      "subtitle": "Vibraciones positivas",
+      "image": "https://www.shutterstock.com/image-vector/reggae-music-beach-party-background-260nw-1673885329.jpg"
+    }
+  ],
+
+  "playlists": [
+    {
+      "name": "Top Hits",
+      "subtitle": "Vibraciones positivas",
+      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQDJVAfvKpL5MIJoY3FNUCWM17pAZqLqaynmw&s"
+    },
+    {
+      "name": "Relax & Chill",
+      "subtitle": "Vibraciones positivas",
+      "image": "https://i.scdn.co/image/ab67616d00001e02ac22b62d5df5f784c3ee21db"
+    },
+    {
+      "name": "Workout Vibes",
+      "subtitle": "Vibraciones positivas",
+      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQv5K9OMA51WwobABQXn7_aIG4apkjlQtdrpg&s"
+    },
+    {
+      "name": "Indie Discoveries",
+      "subtitle": "Vibraciones positivas",
+      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQcbgHFPRQS9t30ThA5Ub1D7PgAeExCGujgKQ&s"
+    }
+  ],
+
+  "banner": [
+    {
+      "name": "Bienvenido a Tu Música",
+      "subtitle": "Explora tus géneros favoritos",
+      "image": "https://los40.com/resizer/v2/NWXLA6CVARI25ESDOXV5UVM67E.jpg?auth=7b0849dabe5b126a5c1eacdf7f6ce1a589461018ba5e96231c39475f1e883f51&quality=70&width=1200&height=544&smart=true"
+    }
+  ]
+}

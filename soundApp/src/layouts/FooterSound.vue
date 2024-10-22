@@ -6,24 +6,14 @@
       </q-toolbar-title>
 
       <!-- Opcional: Enlaces de navegación -->
-      <q-btn flat label="Privacidad" @click="goToPrivacyPolicy" />
-      <q-btn flat label="Términos" @click="goToTerms" />
+      <q-btn flat label="Privacidad" />
+      <q-btn flat label="Términos"  />
     </q-toolbar>
   </q-footer>
 </template>
 
 <script setup>
-import { useRouter } from 'vue-router';
 
-const router = useRouter()
-
-const goToPrivacyPolicy = () => {
-  router.push('/privacidad') // Redirige a la página de Política de privacidad
-}
-
-const goToTerms = () => {
-  router.push('/terminos') // Redirige a la página de Términos y condiciones
-}
 </script>
 
 <style scoped>

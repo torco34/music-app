@@ -1,59 +1,95 @@
+
 <template>
+  <div class="button-container">
+    <q-btn
+      class="glossy q-mx-sm"
+      color="primary"
+      rounded
+      label="Registrarse"
+      @click="openModal('register')"
+    />
+    <q-btn
+      class="glossy q-mx-sm"
+      color="secondary"
+      rounded
+      label="Iniciar Sesión"
+      @click="openModal('login')"
+    />
+  </div>
 
-
-  <q-btn class="glossy q-mx-sm text-white" color="secondary" rounded label="Registrarse" @click="openRegisterModal" />
-  <q-btn class="glossy q-mx-sm text-bae" rounded label="Iniciar Sesión" @click="openLoginModal" />
-
-  <!-- Modal para Registro -->
-  <BaseModal :isOpen="isRegisterModalOpen" title="Registro" @close="closeRegisterModal">
+  <!--  Modal para Registro -->
+  <BaseModal
+    :isOpen="isRegisterModalOpen"
+    title="Registro"
+    @close="closeModal('register')"
+  >
     <BaseForm :is-register="true" @submit="handleRegister" />
   </BaseModal>
-
   <!-- Modal para Inicio de Sesión -->
-  <BaseModal :isOpen="isLoginModalOpen" title="Iniciar Sesión" @close="closeLoginModal">
+  <BaseModal
+    :isOpen="isLoginModalOpen"
+    title="Iniciar Sesión"
+    @close="closeModal('login')"
+  >
     <BaseForm :is-register="false" @submit="handleLogin" />
   </BaseModal>
-
 </template>
 
 <script setup>
 import BaseForm from 'src/components/shared/BaseForm.vue';
 import BaseModal from 'src/components/shared/BaseModal.vue';
-
-
 import { ref } from 'vue';
-
-
-// Control de los modales de registro e inicio de sesión
+import { useAuthStore } from '../../stores/storeAuth/AuthStore.js';
+const authStore = useAuthStore();
+console.log(authStore, "authStore")
+// Estado reactivo para controlar los modales
 const isRegisterModalOpen = ref(false);
 const isLoginModalOpen = ref(false);
 
-// Funciones para abrir los modales
-const openRegisterModal = () => {
-  isRegisterModalOpen.value = true;
+// Métodos para abrir y cerrar modales
+const openModal = (type) => {
+  if (type === 'register') isRegisterModalOpen.value = true;
+  if (type === 'login') isLoginModalOpen.value = true;
 };
 
-const openLoginModal = () => {
-  isLoginModalOpen.value = true;
+const closeModal = (type) => {
+  if (type === 'register') isRegisterModalOpen.value = false;
+  if (type === 'login') isLoginModalOpen.value = false;
 };
 
-// Funciones para cerrar los modales
-const closeRegisterModal = () => {
-  isRegisterModalOpen.value = false;
+
+// lógica para manejar el registros
+const handleRegister = async (data) => {
+  try {
+    const response = await authStore.register(data);
+    if (!authStore.error) {
+      closeModal('register');
+    }
+  } catch (error) {
+    console.error('Error en el registro:', authStore.error);
+  }
 };
 
-const closeLoginModal = () => {
-  isLoginModalOpen.value = false;
+
+
+// Lógica para manejar el inicio de sesión
+const handleLogin = async (data) => {
+  try {
+    const response = await loginUser(data);
+    console.log('Inicio de sesión exitoso:', response.data);
+    closeModal('login');
+  } catch (error) {
+    console.error('Error en el inicio de sesión:', error);
+  }
 };
 
-// Funciones para manejar el envío del formulario
-const handleRegister = (formData) => {
-  console.log('Registro:', formData);
-  closeRegisterModal();
-};
 
-const handleLogin = (formData) => {
-  console.log('Inicio de Sesión:', formData);
-  closeLoginModal();
-};
 </script>
+
+<style scoped>
+.button-container {
+  display: flex;
+  justify-content: center;
+  margin: 1rem 0;
+}
+</style>

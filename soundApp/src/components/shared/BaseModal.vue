@@ -1,8 +1,8 @@
 <template>
   <q-dialog v-model="isDialogOpen" persistent>
-    <q-card>
+    <q-card class="modal-content">
       <q-card-section>
-        <div class="text-h6 text-dark">{{ title }}</div>
+        <div class="text-h6 text-dark text-center">{{ title }}</div>
       </q-card-section>
 
       <q-card-section>
@@ -30,15 +30,18 @@ const props = defineProps({
     default: false,
   },
 });
-
-// Emitir un evento cuando se quiera cerrar el modal
 const emit = defineEmits(['close']);
-
-// Computed para manejar el estado del modal sin mutar la prop
 const isDialogOpen = computed(() => props.isOpen);
-
-// Función para cerrar el modal
 const closeModal = () => {
   emit('close');
 };
 </script>
+<style lang="scss" scoped>
+.modal-content {
+  width: 400px;
+  color: #0d0c0e;
+
+}
+
+
+</style>
