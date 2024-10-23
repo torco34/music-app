@@ -2,7 +2,7 @@
 import { defineStore } from 'pinia'; // O 'vuex' si usas Vuex
 import { loginUser, registerUser } from 'src/service/serviceAuthe/authServicios';
 // import { loginUser, registerUser } from 'src/service/serviceAuthe/';
-console.log(registerUser(), "Register funcion")
+console.log(loginUser(), "Register funcion")
 // import { registerUser, loginUser } from '@/services/authService';
 export const useAuthStore = defineStore('auth', {
   state: () => ({

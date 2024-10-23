@@ -45,11 +45,12 @@
       </template>
     </q-input>
 
-    <div class="q-mt-md">
+    <div class="q-mt-lg full-width">
       <q-btn
         type="submit"
+        rounded
         :label="isRegister ? 'Registrar' : 'Iniciar Sesión'"
-        color="primary"
+        color="accent" class="glossy btn-form"
       />
     </div>
   </q-form>
@@ -90,11 +91,18 @@ const handleSubmit = () => {
 .full-width {
   width: 400px;
   margin:  auto;
-  color: #0d0c0e;
-  background-color: $text-grey;
+  color: #f7f7fa;
+
 }
 
 .q-mt-md {
   margin-top: 1rem;
+  text-transform: none;
+}
+.btn-form{
+  font-weight: bold;
+  width: 100%;
+  margin-top: 20px;
+  text-transform: none;
 }
 </style>

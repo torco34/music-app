@@ -10,7 +10,7 @@
       </q-card-section>
 
       <q-card-actions>
-        <q-btn flat label="Cerrar" @click="closeModal" />
+        <q-btn rounded flat icon="close"  @click="closeModal" class="glossy btn-cerrar"/>
       </q-card-actions>
     </q-card>
   </q-dialog>
@@ -38,10 +38,18 @@ const closeModal = () => {
 </script>
 <style lang="scss" scoped>
 .modal-content {
-  width: 400px;
-  color: #0d0c0e;
-
+  width: 500px;
+  color: #ebe8ee;
+  padding: 20px;
+  font-size: 16px;
+  font-weight: bold;
+  text-transform: none;
+  backdrop-filter: blur(40px);
+  background-color: rgba(234, 223, 238, 0.6);
 }
-
+.btn-cerrar{
+  background-color: #8c66d8;
+  width: 10px;
+}
 
 </style>

@@ -92,4 +92,9 @@ const handleLogin = async (data) => {
   justify-content: center;
   margin: 1rem 0;
 }
+.glossy{
+  font-size: 16px;
+  font-weight: bold;
+  text-transform: none;
+}
 </style>

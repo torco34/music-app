@@ -1,16 +1,26 @@
 <template>
   <q-layout view="hHh LpR lFf">
     <q-header class="flex items-center justify-around fixed-header" elevated>
+      <q-btn
+        flat
+        dense
+        round
+
+:icon="leftDrawerOpen ? 'close' : 'menu'"
+        @click="toggleDrawer"
+        class="q-mx-sm xl-hide btn-layout floating-button"
+      />
       <div><BaseIcon /></div>
       <div><HomeSearch /></div>
       <div><AuthContainerForm /></div>
     </q-header>
 
-    <q-drawer
+
+     <q-drawer
       v-model="leftDrawerOpen"
       side="left"
       class="bg-secondary"
-      :width="400"
+      :width="screenWidth > 1024 ? 400 : 300"
     >
       <div class="text-center">
         <q-list class="q-pb-gl">
@@ -68,17 +78,34 @@
 import AuthContainerForm from "src/components/form/AuthContainerForm.vue";
 import HomeSearch from "src/components/home/HomeSearch.vue";
 import BaseIcon from "src/components/shared/BaseIcon.vue";
-import { onMounted, ref } from "vue";
+import { onMounted, onUnmounted, ref } from "vue";
 import FooterSound from "../layouts/FooterSound.vue";
 import { miniLayoutStore } from "/src/stores/storeHome/storeMiniLayout.js";
 
 const dataMiniLayoutStore = miniLayoutStore(); // Inicializa el store
 const musicItems = ref([]);
 const leftDrawerOpen = ref(true);
-
+const screenWidth = ref(window.innerWidth);
 onMounted(async () => {
   await loadItems();
 });
+// const screenWidth = ref(window.innerWidth);
+
+function updateScreenWidth() {
+  screenWidth.value = window.innerWidth;
+}
+function toggleDrawer() {
+  leftDrawerOpen.value = !leftDrawerOpen.value;
+}
+onMounted(() => {
+  window.addEventListener('resize', updateScreenWidth);
+});
+
+onUnmounted(() => {
+  window.removeEventListener('resize', updateScreenWidth);
+});
+
+// Computed para detectar si es una pantalla grande
 
 async function loadItems() {
   try {
@@ -99,9 +126,9 @@ const changeButtonLabel = (id, event) => {
   top: 0;
   left: 0;
   right: 0;
-  z-index: 10;
+  // z-index: 5;
   background-color: transparent;
-  height: 70px;
+
 }
 
 .q-page-container {
@@ -113,19 +140,40 @@ const changeButtonLabel = (id, event) => {
   font-size: 16px;
   font-weight: bold;
 }
+.floating-button{
+margin: 10px;
+  color: #6200ea; /* Color del texto */
+  border-radius: 50%; /* Forma circular */
+  width: 56px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  justify-content: center;
+  backdrop-filter: blur(20px);
+  background-color: rgba(234, 223, 238, 0.6);
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.3); /* Sombra flotante */
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Animación suave */
+  z-index: 100; /* Asegura que esté por encima de otros elementos */
 
+}
 .styles-button {
   font-size: 16px;
   font-weight: bold;
   text-transform: none;
   backdrop-filter: blur(20px);
-
   background-color: rgba(234, 223, 238, 0.6);
 }
 .colores {
   height: 100px;
 }
-
+// .btn-layout {
+//   background: $secondary;
+//   padding: 16px;
+//   color: white;
+//   z-index: 30;
+//   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+// }
 .color-bli {
   color: rgba(245, 241, 248, 0.9);
   font-size: 16px;
