@@ -25,6 +25,7 @@ export const useAuthStore = defineStore('auth', {
     async login(data) {
       try {
         const userData = await loginUser(data);
+        console.log(userData, "data de ")
         this.user = userData; // Guarda el usuario en el estado
         this.error = null; // Limpia cualquier error
       } catch (error) {

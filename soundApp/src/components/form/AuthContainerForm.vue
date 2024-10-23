@@ -75,7 +75,7 @@ const handleRegister = async (data) => {
 // Lógica para manejar el inicio de sesión
 const handleLogin = async (data) => {
   try {
-    const response = await loginUser(data);
+    const response = await authStore.loginUser(data);
     console.log('Inicio de sesión exitoso:', response.data);
     closeModal('login');
   } catch (error) {

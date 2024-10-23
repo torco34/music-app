@@ -2,9 +2,9 @@ POST  http://localhost:3000/users/register  HTTP/1.1
 Content-Type: application/json
 
 {
-  "username": "Luis",
-  "email": "jimena@gmail.com",
-  "password": "torco@gmail.com"
+  "username": "tor",
+  "email": "tors@gmai.com",
+  "password": "tor123"
  
 
 }
@@ -12,6 +12,14 @@ Content-Type: application/json
 
 
 ###
+POST http://localhost:3000/users/login HTTP/1.1
+Content-Type: application/json
+
+{
+  "email": "tors@gmai.com",
+  "password": "tor123"
+}
+
 
 GET  http://localhost:3000/todo/670becd4d1940a3e6b700ac6  HTTP/1.1
 Content-Type: application/json

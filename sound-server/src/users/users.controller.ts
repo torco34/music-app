@@ -5,6 +5,7 @@ import {
   UsePipes,
   ValidationPipe,
 } from '@nestjs/common';
+import { LoginDto } from './dto/login.dto';
 import { CreateUserDto } from './dto/user.dto';
 import { User } from './schema/user.schema';
 import { UsersService } from './users.service';
@@ -17,5 +18,11 @@ export class UsersController {
   @UsePipes(new ValidationPipe({ whitelist: true, forbidNonWhitelisted: true }))
   async register(@Body() createUserDto: CreateUserDto): Promise<User> {
     return this.usersService.register(createUserDto);
+  }
+
+  @Post('login')
+  @UsePipes(new ValidationPipe({ whitelist: true, forbidNonWhitelisted: true }))
+  async login(@Body() loginDto: LoginDto): Promise<User> {
+    return this.usersService.login(loginDto);
   }
 }
