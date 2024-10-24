@@ -14,24 +14,26 @@ export class UsersService {
     const newUser = new this.userModel({
       ...createUserDto,
       password: hashedPassword,
-    }); // Crea un nuevo usuario con la contraseña hasheada
-    return newUser.save(); // Guarda el nuevo usuario en la base de datos
+    });
+    return newUser.save();
   }
-  async login(loginDto: LoginDto): Promise<User> {
+
+  async login(loginDto: LoginDto): Promise<{ id: string; email: string }> {
     const { email, password } = loginDto;
 
-    // Busca al usuario por email
+    // Busca el usuario por su correo electrónico
     const user = await this.userModel.findOne({ email });
     if (!user) {
       throw new UnauthorizedException('Credenciales incorrectas');
     }
 
-    // Compara la contraseña ingresada con la almacenada
+    // Compara la contraseña proporcionada con la almacenada
     const isPasswordValid = await bcrypt.compare(password, user.password);
     if (!isPasswordValid) {
       throw new UnauthorizedException('Credenciales incorrectas');
     }
 
-    return user; // Retorna el usuario si las credenciales son válidas
+    // Retorna solo los campos necesarios
+    return { id: user._id.toString(), email: user.email }; // Retorna el id y el email del usuario
   }
 }

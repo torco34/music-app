@@ -21,8 +21,9 @@ export class UsersController {
   }
 
   @Post('login')
-  @UsePipes(new ValidationPipe({ whitelist: true, forbidNonWhitelisted: true }))
-  async login(@Body() loginDto: LoginDto): Promise<User> {
+  @UsePipes(new ValidationPipe({ whitelist: true }))
+  async login(@Body() loginDto: LoginDto) {
+    console.log('Intento de login con:', loginDto);
     return this.usersService.login(loginDto);
   }
 }

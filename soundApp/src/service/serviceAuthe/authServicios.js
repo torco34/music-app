@@ -1,5 +1,5 @@
 import { apiConfig } from "../serviceConfig/apiConfig";
-
+console.log(apiConfig, "mmmmm")
 
 export const registerUser = async (data) => {
   try {
@@ -12,14 +12,14 @@ export const registerUser = async (data) => {
   }
 };
 
-export const loginUser = async (loginData) => {
-  try {
-    const response = await apiConfig.post('/users/login', loginData);
-    return response.data;
-  } catch (error) {
-    throw error.response?.data || error.message;
-  }
-};
+// export const loginUser = async (loginData) => {
+//   try {
+//     const response = await apiConfig.post('/users/login', loginData);
+//     return response.data;
+//   } catch (error) {
+//     throw error.response?.data || error.message;
+//   }
+// };
 
 
 
