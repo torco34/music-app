@@ -5,8 +5,6 @@
         flat
         dense
         round
-
-:icon="leftDrawerOpen ? 'close' : 'menu'"
         @click="toggleDrawer"
         class="q-mx-sm xl-hide btn-layout floating-button"
       />

@@ -3,7 +3,7 @@
 export default [
   {
     path: '/',
-    redirect: { name: 'login' },
+    redirect: { name: 'home' },
   },
   {
     path: '',
@@ -20,6 +20,12 @@ export default [
         path: 'perfil',
         component: () => import('src/pages/ProfileUserView.vue'),
         meta: { requiresAuth: false },
+      },
+      {
+        name: 'index-home',
+        path: '',
+        component: () => import('src/pages/MusicHomeView.vue'),
+
       },
     ],
   },
