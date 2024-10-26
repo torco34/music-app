@@ -2,13 +2,14 @@
   <div class="profile-banner">
     <div class="banner-overlay  q-pa-sm">
       <ProfileAvatar :avatarSrc="avatarSrc" />
-
     <div class="container-info q-mx-lg">
       <PerfilName :name="profileName"  />
-      <p class="profile-bio text-primar">{{ profileBio }}dddd</p>
+      <p class="profile-bio text-primar">{{ profileBio }}</p>
     </div>
     </div>
+
   </div>
+
 </template>
 
 <script setup>
@@ -18,12 +19,11 @@ import { default as PerfilName } from './PerfilName.vue';
 const avatarSrc = ref('https://randomuser.me/api/portraits/women/44.jpg');
 const profileName = ref('Jane Doe');
 const profileBio = ref('1 Lista publica | siguiendo a 6 usuario');
-
 </script>
 
 <style scoped>
 .profile-banner {
-  position: fixed;
+
   width: 100%;
   background-image: url('https://img.freepik.com/foto-gratis/fondo-musical-volumetrico-clave-sol-notas-generativas-ai_169016-29576.jpg');
   background-size: cover;
