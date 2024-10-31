@@ -1,23 +1,23 @@
-POST  http://localhost:3000/users/register  HTTP/1.1
+POST  http://localhost:3000/users/login  HTTP/1.1
 Content-Type: application/json
 
 {
-  "username": "tor",
-  "email": "tors@gmai.com",
-  "password": "tor123"
  
+  "email": "bes@gmai.com",
+  "password": "ersd123"
 
 }
 
 
 
 ###
-POST http://localhost:3000/users/login HTTP/1.1
+POST   http://localhost:3000/users/login HTTP/1.1
 Content-Type: application/json
 
 {
-  "email": "tors@gmai.com",
-  "password": "tor123"
+  
+  "email": "beltran@gmai.com",
+  "password": "ersd123"
 }
 
 
