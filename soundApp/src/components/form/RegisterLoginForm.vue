@@ -83,6 +83,8 @@ const showNewPwd = ref(false);
 const emit = defineEmits(['submit']);
 // Emite los datos del formulario
 const handleSubmit = () => {
+  console.log('Datos del formulario antes de emitir:', { ...formData.value }); // Verifica los datos aquí
+
   emit('submit', { ...formData.value });
 };
 </script>

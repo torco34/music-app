@@ -4,7 +4,7 @@
     <ProfileBanner />
   </div>
     <div class="q-pt-xl">
-      <MusicGenreView/>
+      <!-- <MusicGenreView/> -->
     </div>
 
   </q-page>
@@ -12,5 +12,4 @@
 
 <script setup>
 import ProfileBanner from 'src/components/profile/ProfileBanner.vue';
-import MusicGenreView from './MusicGenreView.vue';
 </script>

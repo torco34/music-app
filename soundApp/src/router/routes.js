@@ -1,31 +1,33 @@
-// src/router/routes.js
-
 export default [
   {
     path: '/',
-    redirect: { name: 'home' },
+    redirect: { name: 'music-favorite' }, // Redirige a 'music-favorite' en lugar de 'home'
   },
   {
     path: '',
-    component: () => import('../layouts/LayoutProvider.vue'),
+    component: () => import('src/layouts/LayoutProvider.vue'),
     children: [
       {
         name: 'login',
         path: 'inicio-sesion',
         component: () => import('src/components/form/AuthContainerForm.vue'),
-        meta: { requiresAuth: true },
+        meta: { requiresGuest: true }, // Cambiar a requiresGuest para impedir que usuarios autenticados accedan
       },
       {
-        name: 'login',
+        name: 'perfil',
         path: 'perfil',
         component: () => import('src/pages/ProfileUserView.vue'),
-        meta: { requiresAuth: false },
+        meta: { requiresAuth: true }, // Solo usuarios autenticados
+      },
+      {
+        name: 'music-favorite',
+        path: '/',
+        component: () => import('src/pages/MusicHomeView.vue'),
       },
       {
         name: 'index-home',
-        path: '',
-        component: () => import('src/pages/MusicHomeView.vue'),
-
+        path: 'musica-favorita',
+        component: () => import('src/pages/MusicGenreView.vue'),
       },
     ],
   },
@@ -34,4 +36,43 @@ export default [
     component: () => import('src/pages/ErroNotFoundView.vue'),
   },
 ];
-
+// export default [
+//   {
+//     path: '/',
+//     redirect: { name: 'music-favorite' }, // Redirige a 'music-favorite'
+//   },
+//   {
+//     path: '',
+//     component: () => import('src/layouts/LayoutProvider.vue'),
+//     children: [
+//       {
+//         name: 'login',
+//         path: 'inicio-sesion',
+//         component: () => import('src/components/form/AuthContainerForm.vue'),
+//         meta: { requiresGuest: true }, // Impide que usuarios autenticados accedan
+//       },
+//       {
+//         name: 'perfil',
+//         path: 'perfil',
+//         component: () => import('src/pages/ProfileUserView.vue'),
+//         meta: { requiresAuth: true }, // Solo usuarios autenticados
+//       },
+//       {
+//         name: 'music-favorite',
+//         path: '',
+//         component: () => import('src/pages/MusicHomeView.vue'),
+//         meta: { requiresAuth: true }, // Solo usuarios autenticados
+//       },
+//       {
+//         name: 'index-home',
+//         path: 'musica-favorita',
+//         component: () => import('src/pages/MusicGenreView.vue'),
+//         meta: { requiresAuth: true }, // Solo usuarios autenticados
+//       },
+//     ],
+//   },
+//   {
+//     path: '/:catchAll(.*)*',
+//     component: () => import('src/pages/ErroNotFoundView.vue'),
+//   },
+// ];

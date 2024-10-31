@@ -1,4 +1,3 @@
-
 <template>
   <div class="button-container">
     <q-btn
@@ -32,58 +31,64 @@
     @close="closeModal('login')"
   >
     <RegisterLoginForm :is-register="false" @submit="handleLogin" />
+    <BaseLoading :isLoading="isLoading" />
   </BaseModal>
 </template>
 
 <script setup>
-import RegisterLoginForm from 'src/components/form/RegisterLoginForm.vue';
-import BaseModal from 'src/components/shared/BaseModal.vue';
-import { ref } from 'vue';
-import { useAuthStore } from '../../stores/storeAuth/AuthStore.js';
+import RegisterLoginForm from "src/components/form/RegisterLoginForm.vue";
+import BaseModal from "src/components/shared/BaseModal.vue";
+import BaseLoading from "../shared/BaseLauding.vue";
+import { ref } from "vue";
+import { useAuthStore } from "../../stores/storeAuth/AuthStore.js";
+// const loginUser = loginStore()
 const authStore = useAuthStore();
-console.log(authStore, "authStore")
-// Estado reactivo para controlar los modales
+import { useRouter } from "vue-router";
+const router = useRouter();
 const isRegisterModalOpen = ref(false);
 const isLoginModalOpen = ref(false);
 
-// Métodos para abrir y cerrar modales
+console.log(authStore.login(), "login");
+
 const openModal = (type) => {
-  if (type === 'register') isRegisterModalOpen.value = true;
-  if (type === 'login') isLoginModalOpen.value = true;
+  if (type === "register") isRegisterModalOpen.value = true;
+  if (type === "login") isLoginModalOpen.value = true;
 };
 
 const closeModal = (type) => {
-  if (type === 'register') isRegisterModalOpen.value = false;
-  if (type === 'login') isLoginModalOpen.value = false;
+  if (type === "register") isRegisterModalOpen.value = false;
+  if (type === "login") isLoginModalOpen.value = false;
 };
-
 
 // lógica para manejar el registros
 const handleRegister = async (data) => {
   try {
     const response = await authStore.register(data);
     if (!authStore.error) {
-      closeModal('register');
+      closeModal("register");
     }
   } catch (error) {
-    console.error('Error en el registro:', authStore.error);
+    console.error("Error en el registro:", authStore.error);
   }
 };
-
-
 
 // Lógica para manejar el inicio de sesión
-const handleLogin = async (data) => {
+
+const handleLogin = async (credentials) => {
   try {
-    const response = await authStore.loginUser(data);
-    console.log('Inicio de sesión exitoso:', response.data);
-    closeModal('login');
+    const response = await authStore.login(credentials);
+    if (response.success) {
+      console.log("Login exitoso:", authStore.user);
+      closeModal("login");
+
+      router.push({ name: "perfil" });
+    } else {
+      console.error("Error en el login:", authStore.error);
+    }
   } catch (error) {
-    console.error('Error en el inicio de sesión:', error);
+    console.error("Error inesperado en el login:", error);
   }
 };
-
-
 </script>
 
 <style scoped>
@@ -92,7 +97,7 @@ const handleLogin = async (data) => {
   justify-content: center;
   margin: 1rem 0;
 }
-.glossy{
+.glossy {
   font-size: 16px;
   font-weight: bold;
   text-transform: none;

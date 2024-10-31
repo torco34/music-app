@@ -6,10 +6,10 @@ export const musicMenuLinks = [
     link: '/'
   },
   {
-    title: 'Música',
+    title: 'Música Favorita',
     caption: 'Sección de música',
     icon: 'music_note',
-    link: '/private/musica'
+    link: 'musica-favorita'
   },
   {
     title: 'Albums',

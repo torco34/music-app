@@ -9,13 +9,17 @@
     </div>
 
   </div>
-
+<div>
+  <PerfileBody/>
+</div>
 </template>
 
 <script setup>
 import { ref } from 'vue';
 import ProfileAvatar from './PerfileAvatar.vue';
+
 import { default as PerfilName } from './PerfilName.vue';
+import PerfileBody from './PerfileBody.vue';
 const avatarSrc = ref('https://randomuser.me/api/portraits/women/44.jpg');
 const profileName = ref('Jane Doe');
 const profileBio = ref('1 Lista publica | siguiendo a 6 usuario');

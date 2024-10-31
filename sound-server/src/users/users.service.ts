@@ -17,23 +17,39 @@ export class UsersService {
     });
     return newUser.save();
   }
-
-  async login(loginDto: LoginDto): Promise<{ id: string; email: string }> {
-    const { email, password } = loginDto;
-
-    // Busca el usuario por su correo electrónico
-    const user = await this.userModel.findOne({ email });
+  async login(loginDto: LoginDto) {
+    const user = await this.userModel.findOne({ email: loginDto.email });
     if (!user) {
       throw new UnauthorizedException('Credenciales incorrectas');
     }
 
-    // Compara la contraseña proporcionada con la almacenada
-    const isPasswordValid = await bcrypt.compare(password, user.password);
+    const isPasswordValid = await bcrypt.compare(
+      loginDto.password,
+      user.password,
+    );
     if (!isPasswordValid) {
       throw new UnauthorizedException('Credenciales incorrectas');
     }
 
-    // Retorna solo los campos necesarios
-    return { id: user._id.toString(), email: user.email }; // Retorna el id y el email del usuario
+    // Devuelve el usuario o el token según lo necesites
+    return { id: user._id, email: user.email };
   }
+  // async login(loginDto: LoginDto): Promise<{ id: string; email: string }> {
+  //   const { email, password } = loginDto;
+
+  //   // Busca el usuario por su correo electrónico
+  //   const user = await this.userModel.findOne({ email });
+  //   if (!user) {
+  //     throw new UnauthorizedException('Credenciales incorrectas');
+  //   }
+
+  //   // Compara la contraseña proporcionada con la almacenada
+  //   const isPasswordValid = await bcrypt.compare(password, user.password);
+  //   if (!isPasswordValid) {
+  //     throw new UnauthorizedException('Credenciales incorrectas');
+  //   }
+
+  //   // Retorna solo los campos necesarios
+  //   return { id: user._id.toString(), email: user.email }; // Retorna el id y el email del usuario
+  // }
 }
