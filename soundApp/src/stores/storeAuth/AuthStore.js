@@ -1,76 +1,37 @@
 
-import { defineStore } from 'pinia';
-import { computed, ref } from 'vue';
+import { defineStore } from 'pinia'; // O 'vuex' si usas Vuex
 
-import { loginUser, registerUser } from 'src/service/serviceAuthe/authServicios.js'; // Asegúrate de que la ruta sea correcta
+import { loginUser, registerUser } from 'src/service/serviceAuthe/authServicios.js';
+// import { loginUser, registerUser } from 'src/service/serviceAuthe/';
 
-const register = async (data) => {
-  try {
-    const userData = await registerUser(data);
-    user.value = userData; // Guarda el usuario en el estado
-    error.value = null; // Limpia cualquier error
-  } catch (err) {
-    error.value = err.message || 'Error en el registro';
-  }
-};
+// import { registerUser, loginUser } from '@/services/authService';
+export const useAuthStore = defineStore('auth', {
+  state: () => ({
+    user: null,
+    error: null,
+  }),
+  actions: {
+    async register(data) {
+      try {
+        const userData = await registerUser(data);
 
-export const useAuthStore = defineStore('auth', () => {
-  const token = ref(localStorage.getItem('token') || '');
-  const user = ref(null);
-  const error = ref(null);
-
-  // const login = async (credentials) => {
-  //   try {
-  //     const response = await loginUser(credentials);
-  //     console.log(response, "Respuesta de loginUser"); // Ver qué devuelve la API
-  //     const { access_token, user: loggedInUser } = response; // Cambia esto según la estructura de tu respuesta
-
-  //     if (!access_token) {
-  //       throw new Error("El token de acceso es indefinido");
-  //     }
-
-  //     token.value = access_token;
-  //     user.value = loggedInUser;
-  //     localStorage.setItem('token', access_token);
-  //     error.value = null;
-  //     return { success: true };
-  //   } catch (err) {
-  //     console.error('Error en el login:', err.response?.data || err.message);
-  //     error.value = err.message;
-  //     return { success: false };
-  //   }
-  // };
-
-  const login = async (credentials) => {
-    try {
-      const response = await loginUser(credentials); // Llama a la API para loguear
-
-      // Comprobando si recibimos los datos correctos
-      console.log(response, "Respuesta de loginUser");
-
-      // Suponiendo que la respuesta no incluye access_token, puedes modificar la API para incluirlo,
-      // o puedes almacenar el token en el servidor y recuperarlo aquí
-
-      if (!response.access_token) {
-        throw new Error("El token de acceso es indefinido");
+        console.log(userData, "data de ")
+        this.user = userData; // Guarda el usuario en el estado
+        console.log(userData, "data de ")
+        this.error = null; // Limpia cualquier error
+      } catch (error) {
+        this.error = error.message || 'Error en el registro';
       }
-
-      // Si tu respuesta tiene el token de otra manera, ajusta aquí
-      token.value = response.access_token; // Asegúrate de que esta propiedad exista
-      user.value = response.user || response; // Almacena los detalles del usuario
-      localStorage.setItem('token', token.value);
-      error.value = null;
-      return { success: true };
-
-    } catch (err) {
-      console.error('Error en el login:', err.message || 'Error inesperado');
-      error.value = err.message || 'Error inesperado';
-      return { success: false };
-    }
-  };
-
-
-  const isLoggedIn = computed(() => !!token.value);
-
-  return { token, user, login, register, isLoggedIn, error };
+    },
+    async login(data) {
+      try {
+        const userData = await loginUser(data);
+        console.log(userData, "data de ")
+        this.user = userData; // Guarda el usuario en el estado
+        this.error = null; // Limpia cualquier error
+      } catch (error) {
+        this.error = error.message || 'Error en el inicio de sesión';
+      }
+    },
+  },
 });

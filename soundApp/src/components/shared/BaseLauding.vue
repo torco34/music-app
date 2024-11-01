@@ -10,6 +10,7 @@ export default {
     isLoading: {
       type: Boolean,
       required: true,
+      default: false,
     },
   },
 };

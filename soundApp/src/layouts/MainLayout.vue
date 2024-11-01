@@ -10,7 +10,7 @@
       />
       <div><BaseIcon /></div>
       <div><HomeSearch /></div>
-      <div><AuthContainerForm /></div>
+      <div><AuthForm /></div>
     </q-header>
 
 
@@ -73,7 +73,7 @@
   </q-layout>
 </template>
 <script setup>
-import AuthContainerForm from "src/components/form/AuthContainerForm.vue";
+import AuthForm from "src/components/form/AuthForm.vue";
 import HomeSearch from "src/components/home/HomeSearch.vue";
 import BaseIcon from "src/components/shared/BaseIcon.vue";
 import { useJsonDataStore } from "src/stores/mainLayoutStore";

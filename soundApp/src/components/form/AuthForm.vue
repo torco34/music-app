@@ -41,14 +41,14 @@ import BaseModal from "src/components/shared/BaseModal.vue";
 import BaseLoading from "../shared/BaseLauding.vue";
 import { ref } from "vue";
 import { useAuthStore } from "../../stores/storeAuth/AuthStore.js";
-// const loginUser = loginStore()
+
 const authStore = useAuthStore();
 import { useRouter } from "vue-router";
 const router = useRouter();
 const isRegisterModalOpen = ref(false);
 const isLoginModalOpen = ref(false);
+const isLoading = ref(false);
 
-console.log(authStore.login(), "login");
 
 const openModal = (type) => {
   if (type === "register") isRegisterModalOpen.value = true;
@@ -63,14 +63,19 @@ const closeModal = (type) => {
 // lógica para manejar el registros
 const handleRegister = async (data) => {
   try {
+    isLoading.value = true;
     const response = await authStore.register(data);
+
     if (!authStore.error) {
       closeModal("register");
     }
   } catch (error) {
-    console.error("Error en el registro:", authStore.error);
+    console.error('Error en handleregistre ', error.response?.data || error.message);
+    isLoading.value = false;
   }
 };
+
+
 
 // Lógica para manejar el inicio de sesión
 
@@ -78,16 +83,17 @@ const handleLogin = async (credentials) => {
   try {
     const response = await authStore.login(credentials);
     if (response.success) {
-      console.log("Login exitoso:", authStore.user);
       closeModal("login");
-
       router.push({ name: "perfil" });
     } else {
       console.error("Error en el login:", authStore.error);
     }
   } catch (error) {
     console.error("Error inesperado en el login:", error);
+  }finally {
+    isLoading.value = false;
   }
+
 };
 </script>
 

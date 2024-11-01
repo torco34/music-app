@@ -10,7 +10,7 @@ export default [
       {
         name: 'login',
         path: 'inicio-sesion',
-        component: () => import('src/components/form/AuthContainerForm.vue'),
+        component: () => import('src/components/form/AuthForm.vue'),
         meta: { requiresGuest: true }, // Cambiar a requiresGuest para impedir que usuarios autenticados accedan
       },
       {
@@ -21,12 +21,12 @@ export default [
       },
       {
         name: 'music-favorite',
-        path: '/',
+        path: '',
         component: () => import('src/pages/MusicHomeView.vue'),
       },
       {
-        name: 'index-home',
-        path: 'musica-favorita',
+        name: 'musica-favorita',
+        path: '/',
         component: () => import('src/pages/MusicGenreView.vue'),
       },
     ],

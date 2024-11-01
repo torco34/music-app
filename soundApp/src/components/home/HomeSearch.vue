@@ -26,11 +26,11 @@ const searchTerm = ref('');
 
 const handleItemClick = (item) => {
   // Acción a realizar al hacer clic en un elemento
-  console.log('Elemento seleccionado:', item);
+  // console.log('Elemento seleccionado:', item);
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 .blur-green-bg {
   backdrop-filter: blur(20px);
 
