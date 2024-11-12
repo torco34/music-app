@@ -5,14 +5,12 @@
         flat
         dense
         round
-
-:icon="leftDrawerOpen ? 'close' : 'menu'"
         @click="toggleDrawer"
         class="q-mx-sm xl-hide btn-layout floating-button"
       />
       <div><BaseIcon /></div>
       <div><HomeSearch /></div>
-      <div><AuthContainerForm /></div>
+      <div><AuthForm /></div>
     </q-header>
 
 
@@ -35,29 +33,29 @@
             />Tu Biblioteca
           </q-item-label>
           <q-item
-            v-for="link in musicItems"
-            :key="link.name"
+            v-for="(item, index) in jsonData"
+            :key="index"
             clickable
             dense
-            :to="link.to"
+            :to="item.to"
             class="q-mb-sm bg-inf q-pa-lg"
           >
             <q-item-section class="text-left q-pa-sm">
-              <q-item-label class="color-text">{{ link.name }}</q-item-label>
+              <q-item-label class="color-text">{{ item.name }}</q-item-label>
               <q-item-label class="text-grey q-pa-lg">{{
-                link.subtitle
+                item.subtitle
               }}</q-item-label>
               <q-btn
                 v-if="
-                  link.name === 'Crear tu propia Playlist' ||
-                  link.name === 'Encuentra podcasts que quieras seguir'
+                  item.name === 'Crear tu propia Playlist' ||
+                  item.name === 'Encuentra podcasts que quieras seguir'
                 "
                 class="glossy q-mx-sm styles-button"
                 color="secondary"
                 text-color="primary"
                 rounded
-                :label="link.textButton"
-                @click="(event) => changeButtonLabel(link.id, event)"
+                :label="item.textButton"
+                @click="(event) => handleCrearList(item.id, event)"
               />
             </q-item-section>
           </q-item>
@@ -75,21 +73,35 @@
   </q-layout>
 </template>
 <script setup>
-import AuthContainerForm from "src/components/form/AuthContainerForm.vue";
+import AuthForm from "src/components/form/AuthForm.vue";
 import HomeSearch from "src/components/home/HomeSearch.vue";
 import BaseIcon from "src/components/shared/BaseIcon.vue";
+import { useJsonDataStore } from "src/stores/mainLayoutStore";
 import { onMounted, onUnmounted, ref } from "vue";
 import FooterSound from "../layouts/FooterSound.vue";
-import { miniLayoutStore } from "/src/stores/storeHome/storeMiniLayout.js";
 
-const dataMiniLayoutStore = miniLayoutStore(); // Inicializa el store
-const musicItems = ref([]);
+
+const jsonDataStore = useJsonDataStore();
+const jsonData = ref([]);
+
+
 const leftDrawerOpen = ref(true);
 const screenWidth = ref(window.innerWidth);
+
+// función del store trae json
+const loadData = async () => {
+  try {
+    await jsonDataStore.loadJsonData();
+    jsonData.value = jsonDataStore.getJsonDataSave();
+  } catch (error) {
+    console.error('Error al cargar los datos:', error);
+  }
+};
+
 onMounted(async () => {
-  await loadItems();
+  await loadData();
 });
-// const screenWidth = ref(window.innerWidth);
+
 
 function updateScreenWidth() {
   screenWidth.value = window.innerWidth;
@@ -105,18 +117,10 @@ onUnmounted(() => {
   window.removeEventListener('resize', updateScreenWidth);
 });
 
-// Computed para detectar si es una pantalla grande
 
-async function loadItems() {
-  try {
-    await dataMiniLayoutStore.loadMiniLayout();
-    musicItems.value = dataMiniLayoutStore.getMiniLayout();
-  } catch (error) {
-    console.error("Error al cargar los elementos:", error);
-  }
-}
-const changeButtonLabel = (id, event) => {
-  console.log("Cambiando label...${id}", id, event);
+
+const handleCrearList = (id) => {
+  alert(id)
 };
 </script>
 
@@ -126,7 +130,7 @@ const changeButtonLabel = (id, event) => {
   top: 0;
   left: 0;
   right: 0;
-  // z-index: 5;
+
   background-color: transparent;
 
 }
@@ -142,8 +146,8 @@ const changeButtonLabel = (id, event) => {
 }
 .floating-button{
 margin: 10px;
-  color: #6200ea; /* Color del texto */
-  border-radius: 50%; /* Forma circular */
+  color: #6200ea;
+  border-radius: 50%;
   width: 56px;
   height: 56px;
   display: flex;
@@ -167,13 +171,7 @@ margin: 10px;
 .colores {
   height: 100px;
 }
-// .btn-layout {
-//   background: $secondary;
-//   padding: 16px;
-//   color: white;
-//   z-index: 30;
-//   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-// }
+
 .color-bli {
   color: rgba(245, 241, 248, 0.9);
   font-size: 16px;

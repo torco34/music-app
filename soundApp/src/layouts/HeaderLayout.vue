@@ -37,7 +37,7 @@
 
         <div class="flex items-center">
           <div class="text-body3 text-body__bosq xs-hide q-mx-xl">
-            Bienvenida
+            <!-- Bienvenida {{ authStore.user?.username }} -->
           </div>
           <q-btn
             round
@@ -145,10 +145,11 @@ import MenuItemLink from "src/components/navegation/MenuItemLink.vue";
 import { ref } from "vue";
 import { musicMenuLinks } from "../models/musicMenuLinks";
 import FooterSound from "./FooterSound.vue";
-FooterSound;
+import { useAuthStore } from "src/stores/storeAuth/AuthStore.js";
 const search = ref("");
+const rightDrawerOpen = ref(false);
 
-const leftDrawerOpen = ref(false);
+
 </script>
 
 <style lang="scss" scoped>
