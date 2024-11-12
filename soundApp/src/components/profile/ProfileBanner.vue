@@ -4,7 +4,7 @@
       <ProfileAvatar :avatarSrc="avatarSrc" />
     <div class="container-info q-mx-lg">
       <PerfilName :name="profileName"  />
-      <p class="profile-bio text-primar">{{ profileBio }}</p>
+      <p class="profile-bio text-primar">{{ profileBio }} </p>
     </div>
     </div>
 

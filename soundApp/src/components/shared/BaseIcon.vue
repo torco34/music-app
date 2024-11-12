@@ -1,7 +1,7 @@
 <template>
   <div class="music-icon-container">
     <q-icon class="music-icon" name="music_note" />
-    <span class="music-text">LA Rockula</span>
+    <span class="music-text">La Rockola</span>
   </div>
 </template>
 

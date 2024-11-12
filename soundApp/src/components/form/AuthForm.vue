@@ -62,6 +62,10 @@ const closeModal = (type) => {
 
 // lógica para manejar el registros
 const handleRegister = async (data) => {
+  // if (!data.username || !data.email || !data.password) {
+  //   alert("Por favor complete todos los campos");
+  //   return;
+  // }
   try {
     isLoading.value = true;
     const response = await authStore.register(data);

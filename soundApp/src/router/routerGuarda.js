@@ -1,11 +1,15 @@
-router.beforeEach((to, from, next) => {
-  const authStore = useAuthStore();
+const { useAuthStore } = require("src/stores/storeAuth/AuthStore");
 
+router.beforeEach((to, from, next) => {
+
+  const authStore = useAuthStore();
+  console.log(authStore, "wekowek")
   // Si la ruta requiere autenticación
   if (to.matched.some(record => record.meta.requiresAuth)) {
+    console.log(to.matched, "autenticación")
     if (!authStore.user) {
       // No está autenticado, redirigir a la página de login
-      next({ path: '/login' });
+      next({ path: '/perfil' });
     } else {
       next(); // Permitir el acceso
     }

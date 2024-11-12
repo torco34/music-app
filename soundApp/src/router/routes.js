@@ -18,6 +18,7 @@ export default [
         path: 'perfil',
         component: () => import('src/pages/ProfileUserView.vue'),
         meta: { requiresAuth: true }, // Solo usuarios autenticados
+
       },
       {
         name: 'music-favorite',
@@ -28,6 +29,11 @@ export default [
         name: 'musica-favorita',
         path: '/',
         component: () => import('src/pages/MusicGenreView.vue'),
+      },
+      {
+        name: 'musica-player',
+        path: '/musica-player',
+        component: () => import('src/pages/PlayerPages.vue'),
       },
     ],
   },

@@ -1,4 +1,4 @@
-<template class="bg-info">
+<template class="bg-inf">
   <router-view />
 </template>
 

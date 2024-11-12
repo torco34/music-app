@@ -15,7 +15,7 @@ export const musicMenuLinks = [
     title: 'Albums',
     caption: 'Ver todos los álbumes',
     icon: 'album',
-    link: '/private/albums'
+    link: 'musica-player'
   },
   {
     title: 'Artistas',
