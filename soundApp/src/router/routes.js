@@ -1,6 +1,6 @@
 export default [
   {
-    path: '/',
+    path: '/music-app',
     redirect: { name: 'music-favorite' }, // Redirige a 'music-favorite' en lugar de 'home'
   },
   {
