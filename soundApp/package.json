@@ -10,8 +10,8 @@
     "format": "prettier --write \"**/*.{js,vue,scss,html,md,json}\" --ignore-path .gitignore",
     "test": "echo \"No test specified\" && exit 0",
     "dev": "quasar dev",
-    "build": "quasar build",
-    "deploy": "gh-pages -d dist/spa"
+    "build": "vue-cli-service build",
+    "deploy": "npm run build && gh-pages -d dist"
   },
   "dependencies": {
     "@quasar/extras": "^1.16.4",
