@@ -10,18 +10,21 @@
 
   </div>
 <div>
-  <PerfileBody/>
+  <PerfileBody  />
 </div>
 </template>
 
 <script setup>
 import { ref } from 'vue';
 import ProfileAvatar from './PerfileAvatar.vue';
-
+import { useAuthStore } from 'src/stores/storeAuth/AuthStore.js';
+const authStore = useAuthStore();
 import { default as PerfilName } from './PerfilName.vue';
 import PerfileBody from './PerfileBody.vue';
-const avatarSrc = ref('https://randomuser.me/api/portraits/women/44.jpg');
-const profileName = ref('Jane Doe');
+const avatarSrc = ref('https://randomuser.me/api/portraits/women/10.jpg');
+
+const profileName = ref(authStore.user.username || 'Usuario');
+
 const profileBio = ref('1 Lista publica | siguiendo a 6 usuario');
 </script>
 

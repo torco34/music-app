@@ -1,49 +1,11 @@
 
-// import { defineStore } from 'pinia'; // O 'vuex' si usas Vuex
-
-// import { loginUser, registerUser } from 'src/service/serviceAuthe/authServicios.js';
-
-// export const useAuthStore = defineStore('auth', {
-//   state: () => ({
-//     user: null,
-//     error: null,
-//     token: localStorage.getItem('token') || null,
-
-//   }),
-
-//   actions: {
-//     async register(data) {
-//       console.log(token)
-//       try {
-//         const userData = await registerUser(data);
-
-
-//         this.user = userData; // Guarda el usuario en el estado
-
-//         this.error = null; // Limpia cualquier error
-//       } catch (error) {
-//         this.error = error.message || 'Error en el registro';
-//       }
-//     },
-//     async login(data) {
-//       try {
-//         const userData = await loginUser(data);
-
-//         this.user = userData; // Guarda el usuario en el estado
-//         this.error = null;
-//       } catch (error) {
-//         this.error = error.message || 'Error en el inicio de sesión';
-//       }
-//     },
-//   },
-// });
-import { defineStore } from 'pinia'; // O 'vuex' si usas Vuex
+import { defineStore } from 'pinia';
 
 import { loginUser, registerUser } from 'src/service/serviceAuthe/authServicios.js';
 
 export const useAuthStore = defineStore('auth', {
   state: () => ({
-    user: null,
+    user: JSON.parse(localStorage.getItem('user')) || null, // Obtener usuario del localStorage si está disponible
     error: null,
     token: localStorage.getItem('token') || null, // Obtener token del localStorage
   }),
@@ -53,13 +15,14 @@ export const useAuthStore = defineStore('auth', {
       try {
         const userData = await registerUser(data);
 
-        // Guarda el token en el localStorage y en el estado
+        // Guarda el token y el usuario en el localStorage y en el estado
         if (userData.token) {
           localStorage.setItem('token', userData.token);
           this.token = userData.token;
         }
 
         this.user = userData; // Guarda el usuario en el estado
+        localStorage.setItem('user', JSON.stringify(userData)); // Guardar el usuario en localStorage
         this.error = null; // Limpia cualquier error
       } catch (error) {
         this.error = error.message || 'Error en el registro';
@@ -70,13 +33,14 @@ export const useAuthStore = defineStore('auth', {
       try {
         const userData = await loginUser(data);
 
-        // Guarda el token en el localStorage y en el estado
+        // Guarda el token y el usuario en el localStorage y en el estado
         if (userData.token) {
           localStorage.setItem('token', userData.token);
           this.token = userData.token;
         }
 
         this.user = userData; // Guarda el usuario en el estado
+        localStorage.setItem('user', JSON.stringify(userData)); // Guardar el usuario en localStorage
         this.error = null;
       } catch (error) {
         this.error = error.message || 'Error en el inicio de sesión';
@@ -86,6 +50,7 @@ export const useAuthStore = defineStore('auth', {
     logout() {
       // Elimina el token y el usuario del estado y localStorage
       localStorage.removeItem('token');
+      localStorage.removeItem('user');
       this.token = null;
       this.user = null;
     },

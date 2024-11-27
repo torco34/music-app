@@ -2,56 +2,18 @@
   <q-page class="library-page">
     <div class="library-container">
       <div class="library-header">
-        <h1 class="library-title">Mi Biblioteca</h1>
-        <p class="library-description">
-          Aquí puedes encontrar todos tus álbumes, canciones y listas de reproducción guardadas. Disfruta de tu música
-          favorita en un solo lugar.
-        </p>
+        <h1 class="library-title">Los artistas  mas escuchados de la semana</h1>
+       <HomeFeatured/>
       </div>
-      <div class="library-content">
-        <div class="section">
-          <h2 class="section-title">Álbumes</h2>
-          <div class="albums-list">
-            <div v-for="album in albums" :key="album.title" class="album-item">
-              <img :src="album.cover" :alt="album.title" class="album-cover" />
-              <div class="album-info">
-                <h3 class="album-title">{{ album.title }}</h3>
-                <p class="album-artist">{{ album.artist }}</p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="section">
-          <h2 class="section-title">Listas de Reproducción</h2>
-          <div class="playlists-list">
-            <div v-for="playlist in playlists" :key="playlist.name" class="playlist-item">
-              <img :src="playlist.cover" :alt="playlist.name" class="playlist-cover" />
-              <div class="playlist-info">
-                <h3 class="playlist-name">{{ playlist.name }}</h3>
-                <p class="playlist-description">{{ playlist.description }}</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+
     </div>
   </q-page>
 </template>
 
 <script setup>
 import { ref } from 'vue';
+import HomeFeatured from 'src/components/home/HomeFeatured.vue';
 
-const albums = ref([
-  { title: 'Álbum 1', cover: 'https://via.placeholder.com/150', artist: 'Artista 1' },
-  { title: 'Álbum 2', cover: 'https://via.placeholder.com/150', artist: 'Artista 2' },
-  { title: 'Álbum 3', cover: 'https://via.placeholder.com/150', artist: 'Artista 3' },
-]);
-
-const playlists = ref([
-  { name: 'Playlist 1', cover: 'https://via.placeholder.com/150', description: 'Descripción de la playlist 1' },
-  { name: 'Playlist 2', cover: 'https://via.placeholder.com/150', description: 'Descripción de la playlist 2' },
-  { name: 'Playlist 3', cover: 'https://via.placeholder.com/150', description: 'Descripción de la playlist 3' },
-]);
 </script>
 
 <style lang="scss" scoped>

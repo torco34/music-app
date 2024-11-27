@@ -3,6 +3,8 @@
     <div class="page-header">
       <q-btn
         flat
+        color="primary"
+        size="23"
         round
         icon="more_vert"
         @click="toggleMenu"
@@ -31,7 +33,10 @@
 
     <div>
 
-      <HistorialBody :videos="history" />
+      <!-- <HistorialBody :name="profileName" :videos="history" /> -->
+      <HistorialBody :videos="history" :name="profileName" />
+
+
     </div>
     <div class="text-center">
       <div class="section">
@@ -44,7 +49,7 @@
         <img :src="artist.image" :alt="artist.name" class="artist-image" />
         <div class="artist-info">
           <h3 class="artist-name">{{ artist.name }}</h3>
-          <p class="artist-description">{{ artist.description }}</p>
+          <p class="artist-description">{{ artist.description }}bb</p>
         </div>
       </div>
     </div>
@@ -69,9 +74,10 @@ import { useQuasar } from "quasar";
 import { ref, onMounted } from "vue";
 import HistorialBody from "./subcomponetBody/HistorialBody.vue";
 
-
-
-// import BaseCard from "../shared/BaseCard.vue";
+import { useAuthStore } from 'src/stores/storeAuth/AuthStore.js';
+const authStore = useAuthStore();
+const profileName = ref(authStore.user?.username || 'Usuario');
+console.log(profileName)
 import { useItemsBodyStore } from "src/stores/homeStores/storeItemsBody";
 const Items = useItemsBodyStore()
 const video = ref([]);
@@ -113,20 +119,7 @@ const copyLink = () => {
   });
 };
 // Datos simulados
-const recentVideos = ref([
-  {
-    id: 1,
-    title: "Video 1",
-    description: "Descripción del video 1",
-    thumbnail: "https://via.placeholder.com/300",
-  },
-  {
-    id: 2,
-    title: "Video 2",
-    description: "Descripción del video 2",
-    thumbnail: "https://via.placeholder.com/300",
-  },
-]);
+
 
 const history = ref([
   {

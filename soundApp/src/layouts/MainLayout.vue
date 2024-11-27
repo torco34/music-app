@@ -60,6 +60,16 @@
             </q-item-section>
           </q-item>
         </q-list>
+        <BaseModal
+  :isOpen="showModal"
+  :title="'Atención'"
+  @close="showModal = false"
+>
+  <template #default>
+    <p>{{ modalMessage }}</p>
+  </template>
+</BaseModal>
+
       </div>
     </q-drawer>
 
@@ -79,12 +89,13 @@ import BaseIcon from "src/components/shared/BaseIcon.vue";
 import { useJsonDataStore } from "src/stores/mainLayoutStore";
 import { onMounted, onUnmounted, ref } from "vue";
 import FooterSound from "../layouts/FooterSound.vue";
+import BaseModal from "src/components/shared/BaseModal.vue";
 
-
+const showModal = ref(false);
+const modalMessage = ref('');
+const isUserRegistered = ref(false);
 const jsonDataStore = useJsonDataStore();
 const jsonData = ref([]);
-
-
 const leftDrawerOpen = ref(true);
 const screenWidth = ref(window.innerWidth);
 
@@ -120,7 +131,14 @@ onUnmounted(() => {
 
 
 const handleCrearList = (id) => {
-  alert(id)
+  // alert(id)
+  if (!isUserRegistered.value) {
+
+    modalMessage.value = 'Por favor, regístrate para utilizar esta funcionalidad.';
+    showModal.value = true;
+  } else {
+    alert(`Creando lista con ID: ${id}`);
+  }
 };
 </script>
 

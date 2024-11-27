@@ -36,43 +36,46 @@
         </q-input>
 
         <div class="flex items-center">
-          <div class="text-body3 text-body__bosq xs-hide q-mx-xl">
-            <!-- Bienvenida {{ authStore.user?.username }} -->
-          </div>
-          <q-btn
-            round
-            dense
-            flat
-            class="q-mx-xl icons-style"
-            icon="notifications"
-          >
-            <q-badge color="primary" text-color="white" floating> 1 </q-badge>
-            <q-menu anchor="bottom left" self="top left">
-              <q-item clickable to="/perfil">
-                <q-item-section>item jsdncj1</q-item-section>
-              </q-item>
-            </q-menu>
-          </q-btn>
+          <div class="text-body3 q-pt-lg text-body__bosq xs-hide q-mx-xl">
+            Bienvenida {{ authStore.user?.username || 'Usuario' }}
 
-          <!--  -->
-          <q-btn round flat>
-            <q-avatar size="56px">
-              <img
-                src="https://randomuser.me/api/portraits/women/44.jpg"
-                alt="Profile Picture"
-              />
-            </q-avatar>
-            <q-menu anchor="bottom left" self="top left" class="text-dark">
-              <q-item clickable to="/perfil" class="text-dark">
-                <q-item-section>Perfil</q-item-section>
-              </q-item>
-              <q-item clickable to="/">
-                <q-item-section>
-                  <a @click.prevent="logout">Cerrar Sesión</a>
-                </q-item-section>
-              </q-item>
-            </q-menu>
-          </q-btn>
+          </div>
+          <div class="q-pt-lg flex justify-center">
+            <q-btn round flat class="q-ml-md">
+              <q-avatar size="60px">
+                <img
+                  src="https://randomuser.me/api/portraits/women/44.jpg"
+                  alt="Profile Picture"
+                />
+              </q-avatar>
+              <q-menu anchor="bottom left" self="top left" class="text-dark">
+                <q-item clickable to="/perfil" class="text-dark">
+                  <q-item-section>Perfil</q-item-section>
+                </q-item>
+                <q-item clickable to="/">
+                  <q-item-section>
+                    <a @click.prevent="logout">Cerrar Sesión</a>
+                  </q-item-section>
+                </q-item>
+              </q-menu>
+            </q-btn>
+          </div>
+          <div class="q-pt-md">
+            <q-btn
+              round
+              dense
+              flat
+              class="q-mx-xl icons-style q-pt-lg"
+              icon="notifications"
+            >
+              <q-badge color="primary" text-color="white" floating> 3 </q-badge>
+              <q-menu anchor="bottom left" self="top left">
+                <q-item clickable to="/perfil">
+                  <q-item-section>items</q-item-section>
+                </q-item>
+              </q-menu>
+            </q-btn>
+          </div>
         </div>
       </div>
     </q-header>
@@ -85,23 +88,7 @@
       :width="247"
     >
       <div class="custom-left-menu q-pb-md text-center">
-        <!-- <q-img class="q-my-xl" width="122px" src="~assets/BOSQUE-NAGAL-ARBOL.png" /> -->
         <q-list>
-          <q-item
-            v-for="link in navsWithoutChildren"
-            :key="link.label"
-            clickable
-            dense
-            :to="link.to"
-            class="q-px-lg"
-          >
-            <q-item-section class="col-auto">
-              <q-icon size="24px" color="primary" :name="link.icon" />
-            </q-item-section>
-            <q-item-section class="text-left">
-              <q-item-label class="text-grey">{{ link.label }}</q-item-label>
-            </q-item-section>
-          </q-item>
           <MenuItemLink
             v-for="link in musicMenuLinks"
             :key="link.title"
@@ -145,11 +132,16 @@ import MenuItemLink from "src/components/navegation/MenuItemLink.vue";
 import { ref } from "vue";
 import { musicMenuLinks } from "../models/musicMenuLinks";
 import FooterSound from "./FooterSound.vue";
-import { useAuthStore } from "src/stores/storeAuth/AuthStore.js";
+const leftDrawerOpen = ref(false);
 const search = ref("");
 const rightDrawerOpen = ref(false);
+import { useAuthStore } from "src/stores/storeAuth/AuthStore.js";
 
+const authStore = useAuthStore();
 
+const logout = () => {
+  authStore.logout();
+};
 </script>
 
 <style lang="scss" scoped>

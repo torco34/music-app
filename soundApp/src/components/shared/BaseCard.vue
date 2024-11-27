@@ -1,5 +1,5 @@
 <template>
-  <q-card class="generic-card">
+  <q-card class="generic-card" :to="link"  @click="handleClick">
     <router-link :to="link" class="link">
       <img :src="imageSrc" alt="Imagen genérica" />
       <q-card-section>
@@ -30,6 +30,13 @@ const props = defineProps({
   }
 
 })
+const emit = defineEmits(['click']);
+
+
+const handleClick = () => {
+  emit('click', props.link);
+};
+
 </script>
 
 <style scoped>
@@ -37,7 +44,7 @@ const props = defineProps({
   width: 100%;
   height: 260px;
   overflow: hidden;
-
+  cursor: pointer;
 }
 
 .generic-card img {

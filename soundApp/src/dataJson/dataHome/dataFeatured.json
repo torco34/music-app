@@ -1,0 +1,32 @@
+{
+  "dataFeature": [
+    {
+      "id": 1,
+      "imageSrc": "https://i.scdn.co/image/ab67616d0000b273c665371d5e70273a44a8e301",
+      "title": "Card 1",
+      "subtitle": "Description for card 1",
+      "link": "/details/1"
+    },
+    {
+      "id": 2,
+      "imageSrc": "https://i.ytimg.com/vi/bZLojmRvRd8/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLAwV2fLTs5RUS1kFoPrJCUIP4iXFQ",
+      "title": "Card 2",
+      "subtitle": "Description for card 2",
+      "link": "/details/2"
+    },
+    {
+      "id": 3,
+      "imageSrc": "https://img.youtube.com/vi/MgsdDfdGdHc/maxresdefault.jpg",
+      "title": "Card 3",
+      "subtitle": "Description for card 3",
+      "link": "/details/3"
+    },
+    {
+      "id": 4,
+      "imageSrc": "https://via.placeholder.com/300x200",
+      "title": "Card 4",
+      "subtitle": "Description for card 4",
+      "link": "/details/4"
+    }
+  ]
+}

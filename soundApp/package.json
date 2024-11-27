@@ -10,7 +10,7 @@
     "format": "prettier --write \"**/*.{js,vue,scss,html,md,json}\" --ignore-path .gitignore",
     "test": "echo \"No test specified\" && exit 0",
     "dev": "quasar dev",
-    "build": "vue-cli-service build",
+    "build": "quasar build",
     "deploy": "npm run build && gh-pages -d dist"
   },
   "dependencies": {

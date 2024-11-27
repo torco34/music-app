@@ -8,7 +8,7 @@
 
       <div class="genres-grid">
         <BaseCard v-for="(genre, index) in dataJson.genres" :key="index" :imageSrc="genre.image" :title="genre.name"
-          :subtitle="genre.subtitle" :link="`/genres/${genre.name.toLowerCase()}`" />
+          :subtitle="genre.subtitle" :link="`/genres/${genre.name.toLowerCase()}`"  @click="redirectToGenres(genre.name)"   />
       </div>
     </div>
 
@@ -18,7 +18,7 @@
 
       <div class="genres-grid">
         <BaseCard v-for="(playlist, index) in dataJson.playlists" :key="index" :imageSrc="playlist.image"
-          :title="playlist.name" :subtitle="playlist.subtitle" :link="`/playlists/${playlist.name.toLowerCase()}`" />
+          :title="playlist.name" :subtitle="playlist.subtitle"  :link="`/playlists/${playlist.name.toLowerCase()}`"   @click="redirectToPlaylist" />
       </div>
 
     </div>
@@ -27,11 +27,16 @@
 
 <script setup>
 import { useItemsBodyStore } from "src/stores/homeStores/storeItemsBody";
-import { onMounted, ref } from "vue";
+import { onMounted, ref, computed } from "vue";
+import BaseCard from "../shared/BaseCard.vue";
 import { useRouter } from "vue-router";
+import musicData from "../../dataJson/dataHome/dataHomeItems.json";
+const router = useRouter();
+
+// Datos del json
+
 // Datos de vue
 
-const router = useRouter();
 const dataItemsBody = useItemsBodyStore()
 
 
@@ -65,17 +70,19 @@ onMounted(async () => {
   await loadItemsBody();
 });
 
-// Datos de componentes
-import BaseCard from "../shared/BaseCard.vue";
-// Datos del json
-import musicData from "../../dataJson/dataHome/dataHomeItems.json";
+
 
 // import HomeBanner from "./HomeBanner.vue";
 const dataHome = musicData;
 
-//lógica
-const navigateExplore = (route) => {
-  router.push(route);
+
+const redirectToGenres = (genreName) => {
+
+  router.push(`/genre/${genreName.toLowerCase()}`);
+};
+const redirectToPlaylist = (link) => {
+  console.log(`/playlists/${link.toLowerCase()}`);
+  router.push(link); // Usar el enlace recibido para redirigir
 };
 </script>
 

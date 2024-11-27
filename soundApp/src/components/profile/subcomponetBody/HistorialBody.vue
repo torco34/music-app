@@ -1,7 +1,7 @@
 
 <template>
   <div class="section">
-    <h2 class="section-title">Historial</h2>
+    <h2 class="section-title">Historial de {{ name }}</h2>
 
     <div class="video-historia">
       <div v-for="video in videos" :key="video.id" class="text-center">
@@ -33,6 +33,10 @@ const props = defineProps({
     type: Array,
     default: () => [],
   },
+  name: {
+    type: String,
+    required: true,
+  },
 });
 </script>
 
@@ -44,8 +48,8 @@ const props = defineProps({
 }
 
 .video-thumbnail-small {
-  width: 100px;
-  height: 100px;
+  width: 150px;
+  height: 150px;
   border-radius: 50%;
   object-fit: cover;
   display: block;
@@ -53,7 +57,7 @@ const props = defineProps({
 
 .video-historia {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(3rem, 1fr));
   gap: 1rem;
 }
 
