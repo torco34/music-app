@@ -1,12 +1,12 @@
 <template>
-  <q-card class="generic-card" :to="link"  @click="handleClick">
-    <router-link :to="link" class="link">
+  <q-card class="generic-card"   @click="handleClick">
+
       <img :src="imageSrc" alt="Imagen genérica" />
       <q-card-section>
-        <q-item-label class="">{{ title }}</q-item-label>
-        <q-item-label class="">{{ subtitle }}</q-item-label>
+        <q-item-label >{{ title }}</q-item-label>
+        <q-item-label >{{ subtitle }}</q-item-label>
       </q-card-section>
-    </router-link>
+
   </q-card>
 </template>
 
@@ -24,10 +24,7 @@ const props = defineProps({
     type: String,
     required: true
   },
-  link: {
-    type: String,
-    required: true
-  }
+
 
 })
 const emit = defineEmits(['click']);

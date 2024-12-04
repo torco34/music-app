@@ -1,13 +1,12 @@
-
 import { defineStore } from 'pinia';
 
 import { loginUser, registerUser } from 'src/service/serviceAuthe/authServicios.js';
 
 export const useAuthStore = defineStore('auth', {
   state: () => ({
-    user: JSON.parse(localStorage.getItem('user')) || null, // Obtener usuario del localStorage si está disponible
-    error: null,
+    user: JSON.parse(localStorage.getItem('user')) || null, // Obtener usuario del localStorage
     token: localStorage.getItem('token') || null, // Obtener token del localStorage
+    error: null,
   }),
 
   actions: {
@@ -15,15 +14,15 @@ export const useAuthStore = defineStore('auth', {
       try {
         const userData = await registerUser(data);
 
-        // Guarda el token y el usuario en el localStorage y en el estado
+        // Guarda el token y el usuario en el localStorage
         if (userData.token) {
           localStorage.setItem('token', userData.token);
           this.token = userData.token;
         }
 
-        this.user = userData; // Guarda el usuario en el estado
-        localStorage.setItem('user', JSON.stringify(userData)); // Guardar el usuario en localStorage
-        this.error = null; // Limpia cualquier error
+        this.user = userData;
+        localStorage.setItem('user', JSON.stringify(userData)); // Guardar usuario
+        this.error = null;
       } catch (error) {
         this.error = error.message || 'Error en el registro';
       }
@@ -33,14 +32,14 @@ export const useAuthStore = defineStore('auth', {
       try {
         const userData = await loginUser(data);
 
-        // Guarda el token y el usuario en el localStorage y en el estado
+        // Guarda el token y el usuario en el localStorage
         if (userData.token) {
           localStorage.setItem('token', userData.token);
           this.token = userData.token;
         }
 
-        this.user = userData; // Guarda el usuario en el estado
-        localStorage.setItem('user', JSON.stringify(userData)); // Guardar el usuario en localStorage
+        this.user = userData;
+        localStorage.setItem('user', JSON.stringify(userData)); // Guardar usuario
         this.error = null;
       } catch (error) {
         this.error = error.message || 'Error en el inicio de sesión';

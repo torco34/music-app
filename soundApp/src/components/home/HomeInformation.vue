@@ -11,7 +11,8 @@
           :imageSrc="genre.image"
           :title="genre.name"
           :subtitle="genre.subtitle"
-          :link="`/genres/${genre.name.toLowerCase()}`"
+
+
            @click="handleGenres(genre)"
         />
       </div>
@@ -28,7 +29,7 @@
           :imageSrc="playlist.image"
           :title="playlist.name"
           :subtitle="playlist.subtitle"
-          :link="`/playlists/${playlist.name.toLowerCase()}`"
+
           @click="handlePlaylist(playlist)"
         />
       </div>
@@ -91,26 +92,34 @@ onMounted(() => {
   loadItemsBody();
 });
 const handlePlaylist = (playlist) => {
-  console.log('Playlist seleccionada:', playlist);
+  console.log('Playlist seleccionada:', playlist.name);
   console.log('¿Está autenticado?', isAuthenticated.value);
 
-  if (!isAuthenticated.value) {
-    router.push(`/genres/${genres.name.toLowerCase()}`);
-alert("Not authenticated")
+  // Condiciones para enrutamiento
+  if (playlist.name === "Hip-Hop") {
+    router.push('/artists/');
+  } else if (authStore.user) {
+    // Si el usuario está autenticado y no es "Hip-Hop", redirigir a géneros
+    router.push('/genres/');
   } else {
+    // Si no se cumple ninguna condición de enrutamiento, mostrar el modal
     showModal.value = true;
   }
 };
-const handleGenres = (genre) => {
-  console.log('Playlist seleccionada:', playlist);
-  console.log('¿Está autenticado?', isAuthenticated.value);
 
-  if (!isAuthenticated.value) {
-    router.push(`/genres/${genres.name.toLowerCase()}`);
-alert("Not authenticated")
-  } else {
-    showModal.value = true;
+
+const handleGenres = (genre) => {
+  console.log('Género seleccionado:', genre.name);
+  console.log('¿Está autenticado?', authStore.user ? "Sí" : "No");
+
+  if (authStore.user) {
+    alert("No estás  genre autenticado", genre);
+    router.push("/playlists");
+    if (genre.name === "Hip-Hop") {
+    router.push('/artists/');
   }
+  }
+  showModal.value = true;
 };
 </script>
 

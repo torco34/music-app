@@ -1,40 +1,30 @@
 
-import { createRouter, createWebHistory } from 'vue-router';
-
-import { useAuthStore } from 'src/stores/storeAuth/AuthStore'; // Asegúrate de que la ruta sea válida
-import routes from './routes'; // Ruta correcta para el archivo de rutas
-
-const router = createRouter({
-  history: createWebHistory(),
-  routes,
-});
-
+import { useAuthStore } from 'src/stores/storeAuth/AuthStore';
 router.beforeEach((to, from, next) => {
-  const authStore = useAuthStore();
-  console.log(authStore.user, "user status");  // Verifica el estado del usuario
 
-  // Si la ruta requiere autenticación
+  const authStore = useAuthStore(); // Accede al store de autenticación
+  console.log(authStore.user, "user status"); // Muestra el estado del usuario (debería tener información del usuario si está autenticado)
+
+  // Verifica si la ruta requiere autenticación
   if (to.matched.some(record => record.meta.requiresAuth)) {
     console.log("Requiere autenticación");
     if (!authStore.user) {
-      // No está autenticado, redirigir a la página de login
-      next({ path: '/inicio-sesion' });
+      // Si no está autenticado, redirige a la página de inicio o login
+      next({ path: '/login' });
     } else {
-      next(); // Permitir el acceso
+      // Si está autenticado, permite continuar
+      next();
     }
   }
-    // Si la ruta requiere ser un invitado
+    // Verifica si la ruta requiere ser un invitado (usuario no autenticado)
   else if (to.matched.some(record => record.meta.requiresGuest)) {
     if (authStore.user) {
-      // Ya está autenticado, redirigir a la página principal o dashboard
+      // Si el usuario está autenticado, redirige a la página principal
       next({ path: '/' });
     } else {
-      next(); // Permitir el acceso
+      next(); // Permite el acceso si no está autenticado
     }
-  }
-  else {
-    next(); // Permitir el acceso si no hay reglas de autenticación
+  } else {
+    next(); // Permite el acceso si no hay reglas de autenticación
   }
 });
-
-export default router;
