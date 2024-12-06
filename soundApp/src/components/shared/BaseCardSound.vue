@@ -1,12 +1,10 @@
 <template>
   <div class="base-card-sound">
-
-
-    <div class="media-player">
+    <!-- Reproductor de video -->
+    <div class="media-player" v-if="isPlaying">
       <iframe
-        v-if="isPlaying"
         width="100%"
-        height="150"
+        height="200"
         :src="`https://www.youtube.com/embed/${videoId}?autoplay=1`"
         title="YouTube video player"
         frameborder="0"
@@ -14,10 +12,23 @@
         allowfullscreen
       ></iframe>
     </div>
+
+    <!-- Imagen del card -->
+    <div
+      class="card-image"
+      :class="{ 'is-playing': isPlaying }"
+      v-else
+    >
+      <img :src="thumbnailUrl" alt="Imagen previa del video" />
+    </div>
+
+    <!-- Contenido del card -->
     <div class="card-content">
       <h3>{{ title }}</h3>
       <p>{{ description }}</p>
     </div>
+
+    <!-- Acciones del card -->
     <div class="card-actions">
       <q-btn
         icon="play_arrow"
@@ -28,7 +39,7 @@
         v-if="!isPlaying"
       />
       <q-btn
-      flat
+        flat
         icon="pause"
         label="Pausar"
         color="grey"
@@ -37,7 +48,6 @@
       />
       <q-btn
         icon="favorite"
-        class=" "
         flat
         :color="isFavorite ? 'red' : 'grey'"
         @click="toggleFavorite"
@@ -45,7 +55,7 @@
       />
       <q-btn
         icon="share"
-  flat
+        flat
         label="Compartir"
         color="positive"
         icon-color="blue"
@@ -60,6 +70,10 @@ import { ref } from 'vue';
 
 const props = defineProps({
   videoId: {
+    type: String,
+    required: true,
+  },
+  thumbnailUrl: {
     type: String,
     required: true,
   },
@@ -87,22 +101,46 @@ const toggleFavorite = () => {
 const shareContent = () => {
   const url = `https://www.youtube.com/watch?v=${videoId}`;
   const shareText = `¡Mira este contenido: ${title}! ${url}`;
-  navigator.share
-    ? navigator.share({ title: 'Compartir', text: shareText, url })
-    : alert(`No se pudo compartir automáticamente. Copia este enlace: ${url}`);
+  if (navigator.share) {
+    navigator.share({ title: 'Compartir', text: shareText, url }).catch((err) =>
+      console.error('Error al compartir:', err)
+    );
+  } else {
+    alert(`No se pudo compartir automáticamente. Copia este enlace: ${url}`);
+  }
 };
 </script>
 
 <style scoped>
 .base-card-sound {
-  display: grid;
-  justify-self: start;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  background-color: #4d4a4a;
+  display: flex;
+  flex-direction: column;
+  background-color: rgba(70, 67, 70, 0.6);
   border-radius: 8px;
   padding: 16px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   text-align: center;
+  gap: 16px;
+}
+
+.card-image {
+  width: 100%;
+  height: 200px;
+  overflow: hidden;
+  position: relative;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.card-image.is-playing {
+  transform: scale(1.2);
+  opacity: 0.5;
 }
 
 .card-content h3 {
@@ -113,7 +151,7 @@ const shareContent = () => {
 
 .card-content p {
   margin: 8px 0;
-  color: #666;
+  color: #aaa;
 }
 
 .card-actions {

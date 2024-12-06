@@ -4,7 +4,7 @@
       <div class="genre-header">
         <img src="https://via.placeholder.com/200" alt="Genre Image" class="genre-image" />
         <div class="genre-info">
-          <h1 class="genre-title">Nombre del Género</h1>
+          <h1 class="genre-title">Artistas rock</h1>
           <p class="genre-description">
             Una breve descripción del género musical que explique su origen, características y popularidad. Puedes
             incluir información sobre los subgéneros y su influencia en la música.
