@@ -19,21 +19,24 @@
       <div class="blur-green-bg col flex text-white items-center q-pb-md">
         <q-input
           borderless
-          v-model="search"
+          v-model="searchQuery"
           input-class=""
           class="q-mx-lg col text-white"
           placeholder="Buscar tu musica"
+           @keyup.enter="search"
         >
           <template v-slot:prepend>
-            <q-icon v-if="search === ''" name="search" />
+            <q-icon v-if="searchQuery === ''" name="search" />
             <q-icon
               v-else
               name="clear"
               class="cursor-pointer text-white"
-              @click="search = ''"
+              @click="searchQuery = ''"
+
             />
           </template>
         </q-input>
+
 
         <div class="flex items-center">
           <div class="text-body3 q-pt-lg text-body__bosq xs-hide q-mx-xl">
@@ -116,6 +119,13 @@
       class="bg-secondary"
     >
       texto blanco
+      <div v-if="loading" class="loading">
+      <p>Cargando videos...</p>
+    </div>
+
+    <video-list v-if="!loading && videos.length" :videos="videos" />
+    <div v-if="!loading && error" class="error">{{ error }}</div>
+    <div v-if="!loading && !videos.length && !error">No se encontraron videos.</div>
     </q-drawer>
 
     <q-page-container>
@@ -125,20 +135,36 @@
     </q-page-container>
     <FooterSound />
   </q-layout>
+
 </template>
 
 <script setup>
 import MenuItemLink from "src/components/navegation/MenuItemLink.vue";
+import { useAuthStore } from "src/stores/storeAuth/AuthStore.js";
 import { ref } from "vue";
 import { musicMenuLinks } from "../models/musicMenuLinks";
 import FooterSound from "./FooterSound.vue";
+
 const leftDrawerOpen = ref(false);
-const search = ref("");
+
 const rightDrawerOpen = ref(false);
-import { useAuthStore } from "src/stores/storeAuth/AuthStore.js";
-
+// buscador headers api de YouTube
+const searchQuery = ref('');
+import { useYoutubeStore } from "src/stores/useYoutubeStore.js";
+const getVideosStore = useYoutubeStore()
 const authStore = useAuthStore();
+const search = () => {
+  if (searchQuery.value.trim()) {
+    console.log("Llamando a fetchVideos con:", searchQuery.value);
+    getVideosStore.searchVideos(searchQuery.value); // Llama a la acción
 
+  }
+};
+
+const { videos, loading, error } = getVideosStore;
+console.log(videos, "Loading videos");
+
+// logout
 const logout = () => {
   authStore.logout();
 };
