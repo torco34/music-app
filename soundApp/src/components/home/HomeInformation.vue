@@ -3,6 +3,20 @@
     <!-- Sección de géneros -->
     <div class="genres-section q-mt-x">
       <h5 class="text-titles-base">{{ dataJson.titles.title1 }}</h5>
+      <div v-if="loading">Cargando...</div>
+<div v-else-if="error">Error: {{ error }}</div>
+<div v-else class="videos-grid">
+  <BaseCardSound
+  v-for="(video, index) in youtubeStore.videos"
+  :key="index"
+  :videoId="video.videoId"
+  :thumbnailUrl="video.thumbnailUrl"
+  :title="video.title"
+  :description="video.description"
+/>
+</div>
+
+
 
       <div class="genres-grid">
         <BaseCard
@@ -43,16 +57,21 @@
 
 <script setup>
 import { useItemsBodyStore } from "src/stores/homeStores/storeItemsBody";
-import { onMounted, ref, computed,  watch } from "vue";
-import BaseCard from "../shared/BaseCard.vue";
-import BaseModal from "../shared/BaseModal.vue";
-import { useRouter } from "vue-router";
 import { useAuthStore } from "src/stores/storeAuth/AuthStore.js";
-
+import { useYoutubeStore } from "src/stores/useYoutubeStore.js";
+import { computed, onMounted, ref, watch } from "vue";
+import { useRouter } from "vue-router";
+import BaseCard from "../shared/BaseCard.vue";
+import BaseCardSound from "../shared/BaseCardSound.vue";
+import BaseModal from "../shared/BaseModal.vue";
 const dataItemsBody = useItemsBodyStore();
 const router = useRouter();
 const authStore = useAuthStore();
+const youtubeStore = useYoutubeStore();
 
+console.log(youtubeStore)
+const { videos, loading, error } = youtubeStore;
+console.log(videos, "Loading videos");
 // Verifica si el usuario está autenticado
 const isAuthenticated = computed(() => !!authStore.token);
 const showModal = ref(false);
@@ -86,6 +105,8 @@ const loadItemsBody = async () => {
 
 onMounted(() => {
   loadItemsBody();
+  youtubeStore.searchVideos("jose");
+
 });
 
 // Manejo de la selección de playlist
@@ -167,6 +188,12 @@ watch(() => authStore.user, (newUser) => {
 .genres-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 20px;
+}
+
+.videos-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   gap: 20px;
 }
 </style>

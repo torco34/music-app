@@ -24,7 +24,7 @@
 
     <!-- Contenido del card -->
     <div class="card-content">
-      <h3>{{ title }}</h3>
+      <h3 class="q-text-sm">{{ title }}</h3>
       <p>{{ description }}</p>
     </div>
 
@@ -115,12 +115,12 @@ const shareContent = () => {
 .base-card-sound {
   display: flex;
   flex-direction: column;
-  background-color: rgba(70, 67, 70, 0.6);
+  background-color: rgba(14, 0, 14, 0.9);
   border-radius: 8px;
   padding: 16px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   text-align: center;
-  gap: 16px;
+  /* gap: 16px; */
 }
 
 .card-image {
@@ -142,20 +142,27 @@ const shareContent = () => {
   transform: scale(1.2);
   opacity: 0.5;
 }
+.card-content  {
+  display: flex;
+  flex-direction: column;
+  letter-spacing: -0.5px;
 
+}
 .card-content h3 {
-  margin: 0;
-  font-size: 1.5rem;
+  letter-spacing: -0.5px;
+  font-size: 16px;
   color: #dfdbdb;
+  font-weight: bold;
+
 }
 
 .card-content p {
-  margin: 8px 0;
   color: #aaa;
+  letter-spacing: -0.5px;
 }
 
 .card-actions {
-  margin-top: 16px;
+  margin-top: 1px;
   display: flex;
   justify-content: center;
   gap: 8px;

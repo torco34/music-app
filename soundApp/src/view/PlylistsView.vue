@@ -3,12 +3,8 @@
     <h2 class="q-mt-lg q-mb-md text-h4 text-center text-primary">
   🎵 <span class="text-gradient">Playlist Destacada</span> 🎵
 </h2>
-
-
-
-    <div class="sound-list">
-
-      <BaseCardSound
+<div class="sound-list">
+  <BaseCardSound
   v-for="video in videos"
   :key="video.id"
   :videoId="video.videoId"

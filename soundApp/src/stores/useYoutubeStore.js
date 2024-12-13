@@ -1,6 +1,5 @@
 // src/stores/useYoutubeStore.js
 import { defineStore } from "pinia";
-
 import { fetchYouTubeVideos } from "src/service/fetchYouTubeVideos.js";
 
 export const useYoutubeStore = defineStore("youtube", {

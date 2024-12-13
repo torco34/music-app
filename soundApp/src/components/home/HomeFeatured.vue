@@ -17,7 +17,7 @@
       @close="showModal = false"
     >
       <template #default>
-        <p>{{ modalMessage }}</p>
+        <p>{{ modalMessage }} que es</p>
       </template>
     </BaseModal>
 </div>
@@ -50,7 +50,7 @@ const handleCardClick = (card) => {
 <style scoped>
 .card-list {
   display: flex;
-
+background-color: aqua;
   gap: 20px;
   justify-content: start
 }
