@@ -14,11 +14,7 @@
     </div>
 
     <!-- Imagen del card -->
-    <div
-      class="card-image"
-      :class="{ 'is-playing': isPlaying }"
-      v-else
-    >
+    <div class="card-image" :class="{ 'is-playing': isPlaying }" v-else>
       <img :src="thumbnailUrl" alt="Imagen previa del video" />
     </div>
 
@@ -66,7 +62,7 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { ref } from "vue";
 
 const props = defineProps({
   videoId: {
@@ -102,9 +98,9 @@ const shareContent = () => {
   const url = `https://www.youtube.com/watch?v=${videoId}`;
   const shareText = `¡Mira este contenido: ${title}! ${url}`;
   if (navigator.share) {
-    navigator.share({ title: 'Compartir', text: shareText, url }).catch((err) =>
-      console.error('Error al compartir:', err)
-    );
+    navigator
+      .share({ title: "Compartir", text: shareText, url })
+      .catch((err) => console.error("Error al compartir:", err));
   } else {
     alert(`No se pudo compartir automáticamente. Copia este enlace: ${url}`);
   }
@@ -115,12 +111,11 @@ const shareContent = () => {
 .base-card-sound {
   display: flex;
   flex-direction: column;
-  background-color: rgba(14, 0, 14, 0.9);
-  border-radius: 8px;
-  padding: 16px;
+  background-color: rgba(66, 65, 66, 0.9);
+  border-radius: 18px;
+  padding: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   text-align: center;
-  /* gap: 16px; */
 }
 
 .card-image {
@@ -142,30 +137,32 @@ const shareContent = () => {
   transform: scale(1.2);
   opacity: 0.5;
 }
-.card-content  {
-  display: flex;
-  flex-direction: column;
-  letter-spacing: -0.5px;
-
+.card-content {
+  height: 100px;
+  /* width: 300px; */
+  margin-bottom: 0px;
+  color: #aaa;
 }
 .card-content h3 {
-  letter-spacing: -0.5px;
   font-size: 16px;
-  color: #dfdbdb;
-  font-weight: bold;
-
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
-
 .card-content p {
-  color: #aaa;
-  letter-spacing: -0.5px;
+  font-size: 14px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
 }
 
 .card-actions {
-  margin-top: 1px;
+  margin-top: 30px;
   display: flex;
   justify-content: center;
-  gap: 8px;
+  height: 50px;
+  margin-bottom: 20px;
 }
 
 .q-btn {

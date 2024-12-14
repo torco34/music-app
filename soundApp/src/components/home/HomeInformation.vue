@@ -2,8 +2,9 @@
   <q-page padding>
     <!-- Sección de géneros -->
     <div class="genres-section q-mt-x">
-      <h5 class="text-titles-base">{{ dataJson.titles.title1 }}</h5>
-      <div v-if="loading">Cargando...</div>
+      <h5 v-if="!loading && !error && youtubeStore.videos.length === 0"  class="text-titles-base">{{ dataJson.titles.title1 }}</h5>
+      <h5  v-if="!loading && !error && youtubeStore.videos.length === 5"   class="text-titles-base">ESTA ES TU BÚSQUEDA</h5>
+    <div v-if="loading">Cargando...</div>
 <div v-else-if="error">Error: {{ error }}</div>
 <div v-else class="videos-grid">
   <BaseCardSound
@@ -12,13 +13,13 @@
   :videoId="video.videoId"
   :thumbnailUrl="video.thumbnailUrl"
   :title="video.title"
-  :description="video.description"
+:description="video.description"
 />
 </div>
 
 
-
-      <div class="genres-grid">
+<div  v-if="!loading && !error && youtubeStore.videos.length === 0"  class="featured-playlists q-mt-xl">
+  <div  class="genres-grid">
         <BaseCard
           v-for="(genre, index) in dataJson.genres"
           :key="index"
@@ -28,10 +29,12 @@
           @click="handleGenres(genre)"
         />
       </div>
+</div>
+
     </div>
 
     <!-- Listas de reproducción destacadas -->
-    <div class="featured-playlists q-mt-xl">
+    <div  v-if="!loading && !error && youtubeStore.videos.length === 0"  class="featured-playlists q-mt-xl">
       <h2 class="text-titles-base">{{ dataJson.titles.title2 }}</h2>
 
       <div class="genres-grid">
@@ -105,40 +108,13 @@ const loadItemsBody = async () => {
 
 onMounted(() => {
   loadItemsBody();
-  youtubeStore.searchVideos("jose");
+  youtubeStore.searchVideos("pop");
 
 });
 
-// Manejo de la selección de playlist
-const handlePlaylist = (playlist) => {
-  console.log('Playlist seleccionada:', playlist.name);
-  console.log('¿Está autenticado?', isAuthenticated.value);
 
-  if (playlist.name === "Hip-Hop") {
-    router.push('/artists/');
-  } else if (authStore.user) {
-    // Si el usuario está autenticado, redirige a géneros
-    router.push('/genres/');
-  } else {
-    // Si no está autenticado, muestra el modal
-    showModal.value = true;
-  }
-};
 
-// Manejo de la selección de género
-// const handleGenres = (genre) => {
-//   console.log('Género seleccionado:', genre.name);
-//   console.log('¿Está autenticado?', authStore.user ? "Sí" : "No");
 
-//   if (authStore.user) {
-//     // Si el usuario está autenticado, redirige a la página correspondiente
-//     redirectToGenrePage(genre);
-//   } else {
-//     // Si no está autenticado, guarda el género seleccionado y muestra el modal
-//     selectedGenre.value = genre;
-//     showModal.value = true;
-//   }
-// };
 const handleGenres = (genre) => {
   console.log('Género seleccionado:', genre.name);
 

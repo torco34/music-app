@@ -2,7 +2,6 @@ import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import axios from 'axios';
 import { Model } from 'mongoose';
-
 import { Video } from './schema/api-youtube-schema';
 
 @Injectable()
@@ -20,7 +19,7 @@ export class ApiYoutubeService {
       const response = await axios.get(url);
 
       // Mapear la respuesta para incluir solo los datos relevantes
-      const videos = response.data.items.map((item) => ({
+      const videos = response.data.items.map((item: any) => ({
         title: item.snippet.title,
         description: item.snippet.description,
         videoId: item.id.videoId,
@@ -28,7 +27,7 @@ export class ApiYoutubeService {
       }));
 
       // Opcional: guardar los videos en la base de datos
-      await this.videoModel.insertMany(videos, { ordered: false });
+      // await this.videoModel.insertMany(videos, { ordered: false });
 
       return videos;
     } catch (error) {
