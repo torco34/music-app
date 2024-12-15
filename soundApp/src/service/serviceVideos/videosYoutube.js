@@ -9,7 +9,7 @@ const jsonClient = axios.create({
 export const getVideosYouTube = async () => {
   try {
     const response = await jsonClient.get('src/dataJson/dataVideos/dataVideos.json');
-    console.log(response.data, "kk")
+
     return response.data;
   } catch (error) {
     console.error('Error al obtener los datos:', error);

@@ -12,7 +12,6 @@ export class ApiYoutubeService {
 
   async searchYouTube(query: string): Promise<any> {
     try {
-      // URL del endpoint de búsqueda
       const url = `https://www.googleapis.com/youtube/v3/search?part=snippet&type=video&q=${query}&key=${this.youtubeApiKey}`;
 
       // Realizamos la solicitud HTTP con Axios

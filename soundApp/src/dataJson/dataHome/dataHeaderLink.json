@@ -1,0 +1,34 @@
+{
+  "navMenuLinks": [
+    {
+      "title": "Inicio",
+      "caption": "Sección de música",
+      "icon": "home",
+      "link": "/music-home"
+    },
+    {
+      "title": "Historial",
+      "caption": "Sección de música",
+      "icon": "music_note",
+      "link": "/music-history"
+    },
+    {
+      "title": "Mi música favorita",
+      "caption": "Ver todos los álbumes",
+      "icon": "album",
+      "link": "/favorite-musics"
+    },
+    {
+      "title": "Crear Playlist",
+      "caption": "Crea tu propia playlist",
+      "icon": "playlist_add",
+      "link": "/create-music-playlist"
+    },
+    {
+      "title": "Escuchar Podcast",
+      "caption": "Encuentra podcasts",
+      "icon": "podcasts",
+      "link": "/podcast-music"
+    }
+  ]
+}

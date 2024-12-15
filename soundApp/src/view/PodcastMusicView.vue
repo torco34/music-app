@@ -11,14 +11,13 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
 import HomeFeatured from 'src/components/home/HomeFeatured.vue';
 
 </script>
 
 <style lang="scss" scoped>
 .library-page {
-  // background: #f5f5f5;
+   background: #f5f5f5;
   /* Fondo gris claro */
   // color: $primary ;
   /* Color de texto oscuro */

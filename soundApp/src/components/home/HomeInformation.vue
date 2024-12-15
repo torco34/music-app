@@ -72,9 +72,9 @@ const router = useRouter();
 const authStore = useAuthStore();
 const youtubeStore = useYoutubeStore();
 
-console.log(youtubeStore)
+
 const { videos, loading, error } = youtubeStore;
-console.log(videos, "Loading videos");
+
 // Verifica si el usuario está autenticado
 const isAuthenticated = computed(() => !!authStore.token);
 const showModal = ref(false);
@@ -108,15 +108,15 @@ const loadItemsBody = async () => {
 
 onMounted(() => {
   loadItemsBody();
-  youtubeStore.searchVideos("pop");
-
+  // youtubeStore.searchVideos("pop");
+  router.push('/music-home');
 });
 
 
 
 
 const handleGenres = (genre) => {
-  console.log('Género seleccionado:', genre.name);
+
 
   // Si el usuario está autenticado, redirige a la página de listas de reproducción por género
   if (authStore.user) {

@@ -13,10 +13,10 @@ export const useItemsBodyStore = defineStore('itemsBody', {
 
   actions: {
     async videosYouTube() {
-      console.log()
+
       try {
         const dataItems = await getVideosYouTube();
-        console.log(dataItems)
+
         this.url = dataItems?.url || [];
       } catch (error) {
         console.error('Error al cargar el layout:', error);

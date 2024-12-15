@@ -9,8 +9,8 @@ export default [
     children: [
       {
         name: 'music-favorite',
-        path: '', // Página inicial bajo el layout
-        component: () => import('src/view/MusicHomeView.vue'),
+        path: '/music-home', // Página inicial bajo el layout
+        component: () => import('src/view/HomeMusicView.vue'),
       },
       {
         name: 'perfil',
@@ -19,40 +19,40 @@ export default [
         meta: { requiresAuth: true }, // Solo para usuarios autenticados
       },
       {
-        name: 'play-lista',
-        path: '/musica-favorita',
-        component: () => import('src/view/MusicLibraryView.vue'),
+        name: 'history-music',
+        path: '/music-history',
+        component: () => import('src/view/HistoryMusicView.vue'),
         meta: { requiresGuest: true },
       },
 
       {
-        path: 'musica-jazz',
-        name: 'music-jazz',
-        component: () => import('src/view/MusicLibraryView.vue'),
-        meta: { requiresAuth: true },// imag
+        path: 'favorite-musics',
+        name: '/favorite-music',
+        component: () => import('src/view/FavoriteMusicView.vue'),
+        meta: { requiresAuth: true }
       },
       {
-        path: 'musica-pop',
-        name: 'music-pop',
-        component: () => import('src/view/MusicGenreView.vue'),
+        path: 'create-music-playlist',
+        name: 'create-music-playlists',
+        component: () => import('src/view/CreatePlaylistView.vue'),
         meta: { requiresAuth: true },
       },
       {
-        path: 'musica-rock',
-        name: 'music-rock',
-        component: () => import('src/view/MusicRockView.vue'),
+        path: 'podcast-music',
+        name: 'podcast-musics',
+        component: () => import('src/view/PodcastMusicView.vue'),
         meta: { requiresAuth: true },
       },
       {
-        path: 'musica-reggae',
-        name: 'music-reggae',
-        component: () => import('src/view/PlylistsView.vue'),
+        path: 'config-music',
+        name: 'config-musics',
+        component: () => import('src/view/ConfigMusicView.vue'),
         meta: { requiresAuth: true },
       },
       {
-        path: 'playlists',
-        name: 'playlist',
-        component: () => import('src/view/PlylistsView.vue'),
+        path: 'notifica-music',
+        name: 'notifica-musics',
+        component: () => import('src/view/NotificationsView.vue'),
         meta: { requiresAuth: true },
       },
 

@@ -56,7 +56,9 @@ module.exports = configure(function (/* ctx */) {
     // framework, plugins, y otras configuraciones
     framework: {
       config: {},
-      plugins: []
+      plugins: [
+        'Notify', // Aquí estamos agregando el plugin Notify
+      ],
     },
 
     // Otras configuraciones como SSR, PWA, etc.

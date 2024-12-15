@@ -25,8 +25,7 @@ const searchTerm = ref('');
 // });
 
 const handleItemClick = (item) => {
-  // Acción a realizar al hacer clic en un elemento
-  // console.log('Elemento seleccionado:', item);
+
 }
 </script>
 

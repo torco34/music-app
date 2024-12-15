@@ -29,7 +29,6 @@
       <q-btn
         icon="play_arrow"
         flat
-        label="Reproducir"
         color="primary"
         @click="togglePlay"
         v-if="!isPlaying"
@@ -37,73 +36,82 @@
       <q-btn
         flat
         icon="pause"
-        label="Pausar"
         color="grey"
         @click="togglePlay"
         v-if="isPlaying"
       />
-      <q-btn
-        icon="favorite"
-        flat
-        :color="isFavorite ? 'red' : 'grey'"
-        @click="toggleFavorite"
-        label="Me gusta"
-      />
-      <q-btn
-        icon="share"
-        flat
-        label="Compartir"
-        color="positive"
-        icon-color="blue"
-        @click="shareContent"
-      />
+
+      <q-btn icon="more_vert" flat color="grey" icon-color="blue">
+        <q-menu>
+          <q-list>
+            <q-item clickable @click="emitRemoveFromHistory">
+              <q-item-section avatar>
+                <q-icon name="delete" color="primary" />
+              </q-item-section>
+              <q-item-section>
+                {{ removeText }}
+              </q-item-section>
+            </q-item>
+            <q-item clickable @click="emitShareContent">
+              <q-item-section avatar>
+                <q-icon name="share" color="grey" />
+              </q-item-section>
+              <q-item-section>
+                {{ shareText }}
+              </q-item-section>
+            </q-item>
+          </q-list>
+        </q-menu>
+      </q-btn>
     </div>
   </div>
 </template>
 
 <script setup>
-import { ref } from "vue";
 
+
+// Props para recibir datos dinámicos
 const props = defineProps({
-  videoId: {
+  videoId: { type: String, required: true },
+  thumbnailUrl: { type: String, required: true },
+  title: { type: String, required: true },
+  description: { type: String, required: true },
+  removeText: {
     type: String,
-    required: true,
+    default: "Quitar de la historia",
   },
-  thumbnailUrl: {
+  shareText: {
     type: String,
-    required: true,
+    default: "Compartir",
   },
-  title: {
-    type: String,
-    required: true,
-  },
-  description: {
-    type: String,
-    required: true,
-  },
+  isPlaying: { type: Boolean, required: true },
 });
 
-const isPlaying = ref(false);
-const isFavorite = ref(false);
+// Emitir eventos para comunicación con el componente padre
+const emit = defineEmits([
+  "remove-from-history",
+  "share-content",
+  "reproducir-video",
+]);
+
+
 
 const togglePlay = () => {
-  isPlaying.value = !isPlaying.value;
+  emit("reproducir-video", props.videoId);
 };
 
-const toggleFavorite = () => {
-  isFavorite.value = !isFavorite.value;
+// Emitir evento para eliminar de la historia
+const emitRemoveFromHistory = () => {
+  emit("remove-from-history", props.videoId);
 };
 
-const shareContent = () => {
-  const url = `https://www.youtube.com/watch?v=${videoId}`;
-  const shareText = `¡Mira este contenido: ${title}! ${url}`;
-  if (navigator.share) {
-    navigator
-      .share({ title: "Compartir", text: shareText, url })
-      .catch((err) => console.error("Error al compartir:", err));
-  } else {
-    alert(`No se pudo compartir automáticamente. Copia este enlace: ${url}`);
-  }
+// Emitir evento para compartir el contenido
+const emitShareContent = () => {
+  emit("share-content", {
+    videoId: props.videoId,
+    title: props.title,
+    url: `https://www.youtube.com/watch?v=${props.videoId}`,
+  });
 };
 </script>
 
@@ -111,11 +119,9 @@ const shareContent = () => {
 .base-card-sound {
   display: flex;
   flex-direction: column;
-  background-color: rgba(66, 65, 66, 0.9);
+  background-color: rgba(66, 65, 66, 0);
   border-radius: 18px;
   padding: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  text-align: center;
 }
 
 .card-image {
@@ -124,6 +130,10 @@ const shareContent = () => {
   overflow: hidden;
   position: relative;
   transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.card-image:hover {
+  transform: scale(1.05);
 }
 
 .card-image img {
@@ -137,35 +147,37 @@ const shareContent = () => {
   transform: scale(1.2);
   opacity: 0.5;
 }
+
 .card-content {
   height: 100px;
-  /* width: 300px; */
-  margin-bottom: 0px;
   color: #aaa;
 }
+
 .card-content h3 {
   font-size: 16px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-}
-.card-content p {
-  font-size: 14px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  max-width: 100%;
+  margin-bottom: -10px;
 }
 
 .card-actions {
-  margin-top: 30px;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   height: 50px;
   margin-bottom: 20px;
 }
 
 .q-btn {
   min-width: 100px;
+}
+.q-list {
+  min-width: 10px;
+  color: #aaa;
+}
+
+.q-item {
+  font-size: 14px;
+  background-color: #292828;
 }
 </style>

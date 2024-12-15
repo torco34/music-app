@@ -73,8 +73,9 @@
             >
               <q-badge color="primary" text-color="white" floating> 3 </q-badge>
               <q-menu anchor="bottom left" self="top left">
-                <q-item clickable to="/perfil">
-                  <q-item-section>items</q-item-section>
+                <q-item clickable to="/notifica-music">
+                  <q-item-section class="text-primary">items</q-item-section>
+                  <q-item-section class="text-primary">items</q-item-section>
                 </q-item>
               </q-menu>
             </q-btn>
@@ -93,7 +94,7 @@
       <div class="custom-left-menu q-pb-md text-center">
         <q-list>
           <MenuItemLink
-            v-for="link in musicMenuLinks"
+            v-for="link in navMenuLinks"
             :key="link.title"
             elevated
             v-bind="link"
@@ -104,7 +105,7 @@
               <q-icon size="28px" name="mdi-cog-outline" color="bg-text" />
             </q-item-section>
             <q-item-section class="text-left">
-              <q-item-label class="">Settings</q-item-label>
+              <q-item-label clickable to="/config-music">Settings</q-item-label>
             </q-item-section>
           </q-item>
         </q-list>
@@ -118,7 +119,7 @@
       :width="168"
       class="bg-secondary"
     >
-      texto blanco
+
       <div v-if="loading" class="loading">
       <p>Cargando videos...</p>
     </div>
@@ -141,28 +142,29 @@
 <script setup>
 import MenuItemLink from "src/components/navegation/MenuItemLink.vue";
 import { useAuthStore } from "src/stores/storeAuth/AuthStore.js";
+import { useYoutubeStore } from "src/stores/useYoutubeStore.js";
 import { ref } from "vue";
-import { musicMenuLinks } from "../models/musicMenuLinks";
+import menuData from '../dataJson/dataHome/dataHeaderLink.json';
 import FooterSound from "./FooterSound.vue";
 
+// menu lateral y buscador de videos
+const navMenuLinks = ref(menuData.navMenuLinks);
 const leftDrawerOpen = ref(false);
-
 const rightDrawerOpen = ref(false);
 // buscador headers api de YouTube
 const searchQuery = ref('');
-import { useYoutubeStore } from "src/stores/useYoutubeStore.js";
 const getVideosStore = useYoutubeStore()
 const authStore = useAuthStore();
 const search = () => {
   if (searchQuery.value.trim()) {
-    console.log("Llamando a fetchVideos con:", searchQuery.value);
+
     getVideosStore.searchVideos(searchQuery.value); // Llama a la acción
 
   }
 };
 
 const { videos, loading, error } = getVideosStore;
-console.log(videos, "Loading videos");
+
 
 // logout
 const logout = () => {
@@ -188,7 +190,7 @@ const logout = () => {
 .icons-style {
   font-size: 17px;
   color: $secondary;
-  // background-color: $secondary ;
+
 }
 
 .blur-green-bg {

@@ -71,13 +71,13 @@
 
 <script setup>
 import { useQuasar } from "quasar";
-import { ref, onMounted } from "vue";
+import { onMounted, ref } from "vue";
 import HistorialBody from "./subcomponetBody/HistorialBody.vue";
 
 import { useAuthStore } from 'src/stores/storeAuth/AuthStore.js';
 const authStore = useAuthStore();
 const profileName = ref(authStore.user?.username || 'Usuario');
-console.log(profileName)
+
 import { useItemsBodyStore } from "src/stores/homeStores/storeItemsBody";
 const Items = useItemsBodyStore()
 const video = ref([]);
@@ -87,14 +87,14 @@ const $q = useQuasar();
 const loadItemsBody = async () => {
   try {
     const res = await Items.loadItemsBody();
-    console.log(res.data); // Agrega este log para inspeccionar el contenido
+  // Agrega este log para inspeccionar el contenido
     dataJson.value = {
       videos: video.value.getTitles(),  // Aquí está el problema si `getTitles` no existe
       genres: dataItemsBody.getItemsBody(),
       playlists: dataItemsBody.getPlayLists(),
       banner: dataItemsBody.getBanner(),
     }
-    console.log(dataJson, "hhhh")
+
   } catch (error) {
     console.error('Error al cargar los datos:', error);
   }
