@@ -119,11 +119,17 @@ const emitShareContent = () => {
 .base-card-sound {
   display: flex;
   flex-direction: column;
-  background-color: rgba(66, 65, 66, 0);
+
   border-radius: 18px;
   padding: 10px;
 }
+.base-card-sound:hover {
+  display: flex;
+  flex-direction: column;
+  background-color: rgba(66, 65, 66, 0.3);
+  border-radius: 18px;
 
+}
 .card-image {
   width: 100%;
   height: 200px;
@@ -132,9 +138,7 @@ const emitShareContent = () => {
   transition: transform 0.3s ease, opacity 0.3s ease;
 }
 
-.card-image:hover {
-  transform: scale(1.05);
-}
+
 
 .card-image img {
   width: 100%;

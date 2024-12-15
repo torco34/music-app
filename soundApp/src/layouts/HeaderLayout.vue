@@ -23,7 +23,7 @@
           input-class=""
           class="q-mx-lg col text-white"
           placeholder="Buscar tu musica"
-           @keyup.enter="search"
+          @keyup.enter="search"
         >
           <template v-slot:prepend>
             <q-icon v-if="searchQuery === ''" name="search" />
@@ -32,16 +32,13 @@
               name="clear"
               class="cursor-pointer text-white"
               @click="searchQuery = ''"
-
             />
           </template>
         </q-input>
 
-
         <div class="flex items-center">
           <div class="text-body3 q-pt-lg text-body__bosq xs-hide q-mx-xl">
-            Bienvenida {{ authStore.user?.username || 'Usuario' }}
-
+            Bienvenida {{ authStore.user?.username || "Usuario" }}
           </div>
           <div class="q-pt-lg flex justify-center">
             <q-btn round flat class="q-ml-md">
@@ -117,34 +114,30 @@
       v-model="rightDrawerOpen"
       side="right"
       :width="168"
-      class="bg-secondary"
+      class="bg-secondary q-py-lg"
     >
-
-      <div v-if="loading" class="loading">
-      <p>Cargando videos...</p>
-    </div>
-
-    <video-list v-if="!loading && videos.length" :videos="videos" />
-    <div v-if="!loading && error" class="error">{{ error }}</div>
-    <div v-if="!loading && !videos.length && !error">No se encontraron videos.</div>
+      <BaseIcon />
     </q-drawer>
 
     <q-page-container>
       <q-page>
-        <router-view />
+        <LoadingWrapper>
+          <router-view />
+        </LoadingWrapper>
       </q-page>
     </q-page-container>
     <FooterSound />
   </q-layout>
-
 </template>
 
 <script setup>
 import MenuItemLink from "src/components/navegation/MenuItemLink.vue";
+import BaseIcon from "src/components/shared/BaseIcon.vue";
+import LoadingWrapper from "src/components/shared/LoadingWrapper.vue";
 import { useAuthStore } from "src/stores/storeAuth/AuthStore.js";
 import { useYoutubeStore } from "src/stores/useYoutubeStore.js";
 import { ref } from "vue";
-import menuData from '../dataJson/dataHome/dataHeaderLink.json';
+import menuData from "../dataJson/dataHome/dataHeaderLink.json";
 import FooterSound from "./FooterSound.vue";
 
 // menu lateral y buscador de videos
@@ -152,19 +145,16 @@ const navMenuLinks = ref(menuData.navMenuLinks);
 const leftDrawerOpen = ref(false);
 const rightDrawerOpen = ref(false);
 // buscador headers api de YouTube
-const searchQuery = ref('');
-const getVideosStore = useYoutubeStore()
+const searchQuery = ref("");
+const getVideosStore = useYoutubeStore();
 const authStore = useAuthStore();
 const search = () => {
   if (searchQuery.value.trim()) {
-
     getVideosStore.searchVideos(searchQuery.value); // Llama a la acción
-
   }
 };
 
 const { videos, loading, error } = getVideosStore;
-
 
 // logout
 const logout = () => {
@@ -190,7 +180,6 @@ const logout = () => {
 .icons-style {
   font-size: 17px;
   color: $secondary;
-
 }
 
 .blur-green-bg {

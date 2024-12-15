@@ -24,24 +24,23 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue';
+import { ref } from 'vue';
 
+import { useAuthStore } from "src/stores/storeAuth/AuthStore.js";
 import dataFeature from '../../dataJson/dataHome/dataFeatured.json'; // Asegúrate de que el archivo tenga la extensión .json
 import BaseCard from '../shared/BaseCard.vue'; // Asumiendo que tienes el componente BaseCard
-import { useAuthStore } from "src/stores/storeAuth/AuthStore.js";
 import BaseModal from '../shared/BaseModal.vue';
 const cards = ref(dataFeature.dataFeature); // Directamente usando el archivo importado
 const showModal = ref(false);
 const modalMessage = ref('Debes registrarte para ver más detalles de esta tarjeta');
 const authStore = useAuthStore();
-// const isAuthenticated = computed(() => authStore.isAuthenticated);
+
 const handleCardClick = (card) => {
   if (!isAuthenticated.value) {
-    // Si el usuario no está autenticado, muestra el modal
+
     showModal.value = true;
   } else {
-    // Si está autenticado, navega a la página de detalles
-    // Redirige a la página de detalles (dependiendo de tu routing)
+
     this.$router.push(card.link);
   }
 };

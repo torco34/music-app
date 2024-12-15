@@ -9,25 +9,25 @@
 
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 .music-icon-container {
   display: flex;
   align-items: center;
   font-family: Arial, sans-serif;
-  /* Cambia la fuente si deseas */
-  font-size: 24px;
-  /* Tamaño del texto */
+
+  font-size: 20px;
+
   color: #cec8da;
-  /* Color del texto */
+
 }
 
 .music-icon {
   font-size: 30px;
-  /* Tamaño del ícono */
+
   margin-right: 10px;
-  /* Espacio entre el ícono y el texto */
-  color: #8c66d8;
-  /* Color del ícono */
+
+  color: $primary;
+
 }
 
 .music-text {
