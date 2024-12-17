@@ -29,19 +29,21 @@
       <q-btn
         icon="play_arrow"
         flat
+        round
         color="primary"
         @click="togglePlay"
         v-if="!isPlaying"
       />
       <q-btn
         flat
+        round
         icon="pause"
         color="grey"
         @click="togglePlay"
         v-if="isPlaying"
       />
 
-      <q-btn icon="more_vert" flat color="grey" icon-color="blue">
+      <q-btn icon="more_vert" flat   round color="grey" icon-color="blue">
         <q-menu>
           <q-list>
             <q-item clickable @click="emitRemoveFromHistory">
@@ -168,13 +170,11 @@ const emitShareContent = () => {
 .card-actions {
   display: flex;
   justify-content: space-between;
-  height: 50px;
+
   margin-bottom: 20px;
 }
 
-.q-btn {
-  min-width: 100px;
-}
+
 .q-list {
   min-width: 10px;
   color: #aaa;
