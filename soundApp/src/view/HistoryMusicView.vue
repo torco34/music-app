@@ -1,9 +1,17 @@
 <template>
   <q-page padding>
     <div>
-      <h2 class="q-mt-lg q-mb-md text-h3 text-gradient q-pa-sm text-grey">
-        Historial de reproducciones
-      </h2>
+      <div class="">
+    <BaseBanner
+      v-for="(banner, index) in bannersRef"
+      :key="index"
+      :imageSrc="banner.imageSrc"
+      :title="banner.title"
+      :subtitle="banner.subtitle"
+      :buttonLabel="banner.buttonLabel"
+      @navigate="handleNavigate(banner.title)"
+    />
+  </div>
       <HistoryMusic />
     </div>
   </q-page>
@@ -11,5 +19,7 @@
 
 <script setup>
 import HistoryMusic from "src/components/historyMusic/HistoryMusic.vue";
+import BaseBanner from "src/components/shared/BaseBanner.vue";
+
 </script>
 <style scoped></style>

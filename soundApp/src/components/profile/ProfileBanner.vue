@@ -15,12 +15,12 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
-import ProfileAvatar from './PerfileAvatar.vue';
 import { useAuthStore } from 'src/stores/storeAuth/AuthStore.js';
-const authStore = useAuthStore();
+import { ref } from 'vue';
 import { default as PerfilName } from './PerfilName.vue';
+import ProfileAvatar from './PerfileAvatar.vue';
 import PerfileBody from './PerfileBody.vue';
+const authStore = useAuthStore();
 const avatarSrc = ref('https://randomuser.me/api/portraits/women/10.jpg');
 
 const profileName = ref(authStore.user.username || 'Usuario');
@@ -43,7 +43,6 @@ const profileBio = ref('1 Lista publica | siguiendo a 6 usuario');
   width: 100%;
   height: 100%;
   display: flex;
-
   align-items: center;
   padding: 50px;
 }

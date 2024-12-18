@@ -1,0 +1,16 @@
+{
+  "musicFavorite": [
+    {
+      "imageSrc": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6ftTSdqVhNZ6SmctA8tx392j1IfIhOHqqAA&s",
+      "title": "Mi música favorita",
+      "subtitle": "Descubre las últimas tendencias musicales"
+    }
+  ],
+  "musicHistory": [
+    {
+      "imageSrc": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6ftTSdqVhNZ6SmctA8tx392j1IfIhOHqqAA&s",
+      "title": "Historia de música que has escuchado",
+      "subtitle": "Descubre las últimas tendencias musicales"
+    }
+  ]
+}
