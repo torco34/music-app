@@ -6,6 +6,7 @@ import { ApiYoutubeModule } from './api-youtube/api-youtube.module';
 import { ItemsModule } from './items/items.module';
 import { TodoModule } from './todo/todo.module';
 import { UsersModule } from './users/users.module';
+import { AuthModule } from './auth/auth.module';
 
 dotenv.config();
 @Module({
@@ -15,6 +16,7 @@ dotenv.config();
     UsersModule,
     ItemsModule,
     ApiYoutubeModule,
+    AuthModule,
   ],
   // controllers: [NombreControladorController],
 })

@@ -1,14 +1,24 @@
 {
-  "musicFavorite": [
+  "dataFavoriteJson": [
     {
+      "id": 1,
       "imageSrc": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6ftTSdqVhNZ6SmctA8tx392j1IfIhOHqqAA&s",
       "title": "Mi música favorita",
       "subtitle": "Descubre las últimas tendencias musicales"
     }
   ],
-  "musicHistory": [
+  "dataHistoryJson": [
     {
-      "imageSrc": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6ftTSdqVhNZ6SmctA8tx392j1IfIhOHqqAA&s",
+      "id": 2,
+      "imageSrc": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS83re5-tl-pmGmGvDWp4brqd2cqRcdGPPbFw&s",
+      "title": "Historia de música que has escuchado",
+      "subtitle": "Descubre las últimas tendencias musicales"
+    }
+  ],
+  "dataHomeJson": [
+    {
+      "id": 3,
+      "imageSrc": "https://media.gq.com.mx/photos/616efbba1e31b9f118d1e3cb/16:9/w_2560%2Cc_limit/apple%2520music.jpg",
       "title": "Historia de música que has escuchado",
       "subtitle": "Descubre las últimas tendencias musicales"
     }

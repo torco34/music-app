@@ -1,14 +1,22 @@
-import { Injectable, UnauthorizedException } from '@nestjs/common';
+import {
+  Injectable,
+  NotFoundException,
+  UnauthorizedException,
+} from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import * as bcrypt from 'bcrypt';
 import { Model } from 'mongoose';
 
 import { LoginDto } from './dto/login.dto';
+import { UpdateUserDto } from './dto/updateUser.dto';
 import { CreateUserDto } from './dto/user.dto';
 import { User } from './schema/user.schema';
 
 @Injectable()
 export class UsersService {
+  findOneByEmail(email: string) {
+    throw new Error('Method not implemented.');
+  }
   constructor(@InjectModel(User.name) private userModel: Model<User>) {}
 
   // Método para registrar un nuevo usuario
@@ -44,5 +52,27 @@ export class UsersService {
 
     // Retornar solo los campos necesarios
     return { id: user._id.toString(), email: user.email };
+  }
+  // editar
+  async updateProfile(
+    userId: string,
+    updateUserDto: UpdateUserDto,
+  ): Promise<User> {
+    if (updateUserDto.password) {
+      // Hashear la contraseña si se actualiza
+      updateUserDto.password = await bcrypt.hash(updateUserDto.password, 10);
+    }
+
+    const updatedUser = await this.userModel.findByIdAndUpdate(
+      userId,
+      { $set: updateUserDto },
+      { new: true }, // Devuelve el documento actualizado
+    );
+
+    if (!updatedUser) {
+      throw new NotFoundException('Usuario no encontrado');
+    }
+
+    return updatedUser;
   }
 }

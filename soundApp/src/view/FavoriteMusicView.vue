@@ -9,6 +9,7 @@
         :subtitle="banner.subtitle"
         :buttonLabel="banner.buttonLabel"
       />
+
     </section>
     <section>
       <FavoriteMusicFather />
@@ -22,7 +23,7 @@ import BaseBanner from "src/components/shared/BaseBanner.vue";
 import dataBanners from "src/dataJson/dataBanner/dataBanners.json";
 import { ref } from "vue";
 
-const bannersFavorite = ref(dataBanners.musicFavorite);
+const bannersFavorite = ref(dataBanners.dataFavoriteJson);
 </script>
 
 <style scoped>
